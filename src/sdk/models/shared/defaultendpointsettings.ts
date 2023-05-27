@@ -9,10 +9,10 @@ import { Expose } from "class-transformer";
  * A collection of settings for a Neon endpoint
  */
 export class DefaultEndpointSettings extends SpeakeasyBase {
-  /**
-   * A raw representation of PostgreSQL settings
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "pg_settings" })
-  pgSettings?: Record<string, string>;
+    /**
+     * A raw representation of PostgreSQL settings
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "pg_settings" })
+    pgSettings?: Record<string, string>;
 }

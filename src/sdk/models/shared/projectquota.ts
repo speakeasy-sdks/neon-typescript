@@ -23,53 +23,53 @@ import { Expose } from "class-transformer";
  *
  */
 export class ProjectQuota extends SpeakeasyBase {
-  /**
-   * The total amount of wall-clock time allowed to be spent by project's compute endpoints.
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "active_time_seconds" })
-  activeTimeSeconds?: number;
+    /**
+     * The total amount of wall-clock time allowed to be spent by project's compute endpoints.
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "active_time_seconds" })
+    activeTimeSeconds?: number;
 
-  /**
-   * The total amount of CPU seconds allowed to be spent by project's compute endpoints.
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "compute_time_seconds" })
-  computeTimeSeconds?: number;
+    /**
+     * The total amount of CPU seconds allowed to be spent by project's compute endpoints.
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "compute_time_seconds" })
+    computeTimeSeconds?: number;
 
-  /**
-   * Total amount of data transferred from all project's branches using proxy.
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "data_transfer_bytes" })
-  dataTransferBytes?: number;
+    /**
+     * Total amount of data transferred from all project's branches using proxy.
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "data_transfer_bytes" })
+    dataTransferBytes?: number;
 
-  /**
-   * Limit on the logical size of every project's branch.
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "logical_size_bytes" })
-  logicalSizeBytes?: number;
+    /**
+     * Limit on the logical size of every project's branch.
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "logical_size_bytes" })
+    logicalSizeBytes?: number;
 
-  /**
-   * Total amount of data written to all project's branches.
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "written_data_bytes" })
-  writtenDataBytes?: number;
+    /**
+     * Total amount of data written to all project's branches.
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "written_data_bytes" })
+    writtenDataBytes?: number;
 }

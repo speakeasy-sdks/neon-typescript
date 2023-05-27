@@ -10,8 +10,8 @@ import { Expose, Type } from "class-transformer";
  * Returned information about the specified endpoint
  */
 export class EndpointResponse extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  @Expose({ name: "endpoint" })
-  @Type(() => Endpoint)
-  endpoint: Endpoint;
+    @SpeakeasyMetadata()
+    @Expose({ name: "endpoint" })
+    @Type(() => Endpoint)
+    endpoint: Endpoint;
 }

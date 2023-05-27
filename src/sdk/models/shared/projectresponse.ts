@@ -10,8 +10,8 @@ import { Expose, Type } from "class-transformer";
  * Deleted the specified project
  */
 export class ProjectResponse extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  @Expose({ name: "project" })
-  @Type(() => Project)
-  project: Project;
+    @SpeakeasyMetadata()
+    @Expose({ name: "project" })
+    @Type(() => Project)
+    project: Project;
 }

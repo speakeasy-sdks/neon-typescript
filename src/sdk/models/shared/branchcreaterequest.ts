@@ -7,56 +7,56 @@ import { BranchCreateRequestEndpointOptions } from "./branchcreaterequestendpoin
 import { Expose, Transform, Type } from "class-transformer";
 
 export class BranchCreateRequestBranch extends SpeakeasyBase {
-  /**
-   * The branch name
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "name" })
-  name?: string;
+    /**
+     * The branch name
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "name" })
+    name?: string;
 
-  /**
-   * The `branch_id` of the parent branch
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "parent_id" })
-  parentId?: string;
+    /**
+     * The `branch_id` of the parent branch
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "parent_id" })
+    parentId?: string;
 
-  /**
-   * A Log Sequence Number (LSN) on the parent branch. The branch will be created with data from this LSN.
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "parent_lsn" })
-  parentLsn?: string;
+    /**
+     * A Log Sequence Number (LSN) on the parent branch. The branch will be created with data from this LSN.
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "parent_lsn" })
+    parentLsn?: string;
 
-  /**
-   * A timestamp identifying a point in time on the parent branch. The branch will be created with data starting from this point in time.
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "parent_timestamp" })
-  @Transform(({ value }) => new Date(value), { toClassOnly: true })
-  parentTimestamp?: Date;
+    /**
+     * A timestamp identifying a point in time on the parent branch. The branch will be created with data starting from this point in time.
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "parent_timestamp" })
+    @Transform(({ value }) => new Date(value), { toClassOnly: true })
+    parentTimestamp?: Date;
 }
 
 export class BranchCreateRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  @Expose({ name: "branch" })
-  @Type(() => BranchCreateRequestBranch)
-  branch?: BranchCreateRequestBranch;
+    @SpeakeasyMetadata()
+    @Expose({ name: "branch" })
+    @Type(() => BranchCreateRequestBranch)
+    branch?: BranchCreateRequestBranch;
 
-  @SpeakeasyMetadata({ elemType: BranchCreateRequestEndpointOptions })
-  @Expose({ name: "endpoints" })
-  @Type(() => BranchCreateRequestEndpointOptions)
-  endpoints?: BranchCreateRequestEndpointOptions[];
+    @SpeakeasyMetadata({ elemType: BranchCreateRequestEndpointOptions })
+    @Expose({ name: "endpoints" })
+    @Type(() => BranchCreateRequestEndpointOptions)
+    endpoints?: BranchCreateRequestEndpointOptions[];
 }

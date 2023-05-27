@@ -7,50 +7,44 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 
 export class DeleteProjectBranchRoleRequest extends SpeakeasyBase {
-  /**
-   * The branch ID
-   */
-  @SpeakeasyMetadata({
-    data: "pathParam, style=simple;explode=false;name=branch_id",
-  })
-  branchId: string;
+    /**
+     * The branch ID
+     */
+    @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=branch_id" })
+    branchId: string;
 
-  /**
-   * The Neon project ID
-   */
-  @SpeakeasyMetadata({
-    data: "pathParam, style=simple;explode=false;name=project_id",
-  })
-  projectId: string;
+    /**
+     * The Neon project ID
+     */
+    @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project_id" })
+    projectId: string;
 
-  /**
-   * The role name
-   */
-  @SpeakeasyMetadata({
-    data: "pathParam, style=simple;explode=false;name=role_name",
-  })
-  roleName: string;
+    /**
+     * The role name
+     */
+    @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=role_name" })
+    roleName: string;
 }
 
 export class DeleteProjectBranchRoleResponse extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  contentType: string;
+    @SpeakeasyMetadata()
+    contentType: string;
 
-  /**
-   * General Error
-   */
-  @SpeakeasyMetadata()
-  generalError?: shared.GeneralError;
+    /**
+     * General Error
+     */
+    @SpeakeasyMetadata()
+    generalError?: shared.GeneralError;
 
-  /**
-   * Deleted the specified role from the branch
-   */
-  @SpeakeasyMetadata()
-  roleOperations?: shared.RoleOperations;
+    /**
+     * Deleted the specified role from the branch
+     */
+    @SpeakeasyMetadata()
+    roleOperations?: shared.RoleOperations;
 
-  @SpeakeasyMetadata()
-  statusCode: number;
+    @SpeakeasyMetadata()
+    statusCode: number;
 
-  @SpeakeasyMetadata()
-  rawResponse?: AxiosResponse;
+    @SpeakeasyMetadata()
+    rawResponse?: AxiosResponse;
 }

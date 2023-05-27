@@ -6,30 +6,30 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Type } from "class-transformer";
 
 export class DatabaseUpdateRequestDatabase extends SpeakeasyBase {
-  /**
-   * The name of the database
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "name" })
-  name?: string;
+    /**
+     * The name of the database
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "name" })
+    name?: string;
 
-  /**
-   * The name of the role that owns the database
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "owner_name" })
-  ownerName?: string;
+    /**
+     * The name of the role that owns the database
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "owner_name" })
+    ownerName?: string;
 }
 
 export class DatabaseUpdateRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  @Expose({ name: "database" })
-  @Type(() => DatabaseUpdateRequestDatabase)
-  database: DatabaseUpdateRequestDatabase;
+    @SpeakeasyMetadata()
+    @Expose({ name: "database" })
+    @Type(() => DatabaseUpdateRequestDatabase)
+    database: DatabaseUpdateRequestDatabase;
 }

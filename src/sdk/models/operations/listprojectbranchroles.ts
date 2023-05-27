@@ -7,42 +7,38 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 
 export class ListProjectBranchRolesRequest extends SpeakeasyBase {
-  /**
-   * The branch ID
-   */
-  @SpeakeasyMetadata({
-    data: "pathParam, style=simple;explode=false;name=branch_id",
-  })
-  branchId: string;
+    /**
+     * The branch ID
+     */
+    @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=branch_id" })
+    branchId: string;
 
-  /**
-   * The Neon project ID
-   */
-  @SpeakeasyMetadata({
-    data: "pathParam, style=simple;explode=false;name=project_id",
-  })
-  projectId: string;
+    /**
+     * The Neon project ID
+     */
+    @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project_id" })
+    projectId: string;
 }
 
 export class ListProjectBranchRolesResponse extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  contentType: string;
+    @SpeakeasyMetadata()
+    contentType: string;
 
-  /**
-   * General Error
-   */
-  @SpeakeasyMetadata()
-  generalError?: shared.GeneralError;
+    /**
+     * General Error
+     */
+    @SpeakeasyMetadata()
+    generalError?: shared.GeneralError;
 
-  /**
-   * Returned a list of roles from the specified branch.
-   */
-  @SpeakeasyMetadata()
-  rolesResponse?: shared.RolesResponse;
+    /**
+     * Returned a list of roles from the specified branch.
+     */
+    @SpeakeasyMetadata()
+    rolesResponse?: shared.RolesResponse;
 
-  @SpeakeasyMetadata()
-  statusCode: number;
+    @SpeakeasyMetadata()
+    statusCode: number;
 
-  @SpeakeasyMetadata()
-  rawResponse?: AxiosResponse;
+    @SpeakeasyMetadata()
+    rawResponse?: AxiosResponse;
 }

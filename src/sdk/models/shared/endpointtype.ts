@@ -10,6 +10,6 @@
  *
  */
 export enum EndpointType {
-  ReadOnly = "read_only",
-  ReadWrite = "read_write",
+    ReadOnly = "read_only",
+    ReadWrite = "read_write",
 }

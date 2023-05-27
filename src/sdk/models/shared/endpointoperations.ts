@@ -11,13 +11,13 @@ import { Expose, Type } from "class-transformer";
  * Created an endpoint
  */
 export class EndpointOperations extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  @Expose({ name: "endpoint" })
-  @Type(() => Endpoint)
-  endpoint: Endpoint;
+    @SpeakeasyMetadata()
+    @Expose({ name: "endpoint" })
+    @Type(() => Endpoint)
+    endpoint: Endpoint;
 
-  @SpeakeasyMetadata({ elemType: Operation })
-  @Expose({ name: "operations" })
-  @Type(() => Operation)
-  operations: Operation[];
+    @SpeakeasyMetadata({ elemType: Operation })
+    @Expose({ name: "operations" })
+    @Type(() => Operation)
+    operations: Operation[];
 }

@@ -6,8 +6,8 @@
  * The status of the operation
  */
 export enum OperationStatus {
-  Running = "running",
-  Finished = "finished",
-  Failed = "failed",
-  Scheduling = "scheduling",
+    Running = "running",
+    Finished = "finished",
+    Failed = "failed",
+    Scheduling = "scheduling",
 }

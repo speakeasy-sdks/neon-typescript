@@ -10,9 +10,9 @@
  *
  */
 export enum BillingSubscriptionType {
-  Unknown = "UNKNOWN",
-  Free = "free",
-  Pro = "pro",
-  PlatformPartnership = "platform_partnership",
-  Enterprise = "enterprise",
+    Unknown = "UNKNOWN",
+    Free = "free",
+    Pro = "pro",
+    PlatformPartnership = "platform_partnership",
+    Enterprise = "enterprise",
 }

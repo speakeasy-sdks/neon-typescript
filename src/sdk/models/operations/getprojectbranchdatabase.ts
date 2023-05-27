@@ -7,50 +7,44 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 
 export class GetProjectBranchDatabaseRequest extends SpeakeasyBase {
-  /**
-   * The branch ID
-   */
-  @SpeakeasyMetadata({
-    data: "pathParam, style=simple;explode=false;name=branch_id",
-  })
-  branchId: string;
+    /**
+     * The branch ID
+     */
+    @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=branch_id" })
+    branchId: string;
 
-  /**
-   * The database name
-   */
-  @SpeakeasyMetadata({
-    data: "pathParam, style=simple;explode=false;name=database_name",
-  })
-  databaseName: string;
+    /**
+     * The database name
+     */
+    @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=database_name" })
+    databaseName: string;
 
-  /**
-   * The Neon project ID
-   */
-  @SpeakeasyMetadata({
-    data: "pathParam, style=simple;explode=false;name=project_id",
-  })
-  projectId: string;
+    /**
+     * The Neon project ID
+     */
+    @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project_id" })
+    projectId: string;
 }
 
 export class GetProjectBranchDatabaseResponse extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  contentType: string;
+    @SpeakeasyMetadata()
+    contentType: string;
 
-  /**
-   * Returned the database details
-   */
-  @SpeakeasyMetadata()
-  databaseResponse?: shared.DatabaseResponse;
+    /**
+     * Returned the database details
+     */
+    @SpeakeasyMetadata()
+    databaseResponse?: shared.DatabaseResponse;
 
-  /**
-   * General Error
-   */
-  @SpeakeasyMetadata()
-  generalError?: shared.GeneralError;
+    /**
+     * General Error
+     */
+    @SpeakeasyMetadata()
+    generalError?: shared.GeneralError;
 
-  @SpeakeasyMetadata()
-  statusCode: number;
+    @SpeakeasyMetadata()
+    statusCode: number;
 
-  @SpeakeasyMetadata()
-  rawResponse?: AxiosResponse;
+    @SpeakeasyMetadata()
+    rawResponse?: AxiosResponse;
 }

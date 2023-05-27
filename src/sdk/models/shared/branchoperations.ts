@@ -11,13 +11,13 @@ import { Expose, Type } from "class-transformer";
  * Deleted the specified branch
  */
 export class BranchOperations extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  @Expose({ name: "branch" })
-  @Type(() => Branch)
-  branch: Branch;
+    @SpeakeasyMetadata()
+    @Expose({ name: "branch" })
+    @Type(() => Branch)
+    branch: Branch;
 
-  @SpeakeasyMetadata({ elemType: Operation })
-  @Expose({ name: "operations" })
-  @Type(() => Operation)
-  operations: Operation[];
+    @SpeakeasyMetadata({ elemType: Operation })
+    @Expose({ name: "operations" })
+    @Type(() => Operation)
+    operations: Operation[];
 }

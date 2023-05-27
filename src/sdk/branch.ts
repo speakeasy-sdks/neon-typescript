@@ -11,1497 +11,1416 @@ import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
  * These methods allow you to create and manage branches in your Neon project. For related information, see [Manage branches](https://neon.tech/docs/manage/branches).
  */
 export class Branch {
-  _defaultClient: AxiosInstance;
-  _securityClient: AxiosInstance;
-  _serverURL: string;
-  _language: string;
-  _sdkVersion: string;
-  _genVersion: string;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    _language: string;
+    _sdkVersion: string;
+    _genVersion: string;
 
-  constructor(
-    defaultClient: AxiosInstance,
-    securityClient: AxiosInstance,
-    serverURL: string,
-    language: string,
-    sdkVersion: string,
-    genVersion: string
-  ) {
-    this._defaultClient = defaultClient;
-    this._securityClient = securityClient;
-    this._serverURL = serverURL;
-    this._language = language;
-    this._sdkVersion = sdkVersion;
-    this._genVersion = genVersion;
-  }
-
-  /**
-   * Create a branch
-   *
-   * @remarks
-   * Creates a branch in the specified project.
-   * You can obtain a `project_id` by listing the projects for your Neon account.
-   *
-   * This method does not require a request body, but you can specify one to create an endpoint for the branch or to select a non-default parent branch.
-   * The default behavior is to create a branch from the project's root branch (`main`) with no endpoint, and the branch name is auto-generated.
-   * For related information, see [Manage branches](https://neon.tech/docs/manage/branches/).
-   *
-   */
-  async createProjectBranch(
-    req: operations.CreateProjectBranchRequest,
-    config?: AxiosRequestConfig
-  ): Promise<operations.CreateProjectBranchResponse> {
-    if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.CreateProjectBranchRequest(req);
+    constructor(
+        defaultClient: AxiosInstance,
+        securityClient: AxiosInstance,
+        serverURL: string,
+        language: string,
+        sdkVersion: string,
+        genVersion: string
+    ) {
+        this._defaultClient = defaultClient;
+        this._securityClient = securityClient;
+        this._serverURL = serverURL;
+        this._language = language;
+        this._sdkVersion = sdkVersion;
+        this._genVersion = genVersion;
     }
 
-    const baseURL: string = this._serverURL;
-    const url: string = utils.generateURL(
-      baseURL,
-      "/projects/{project_id}/branches",
-      req
-    );
-
-    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
-
-    try {
-      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
-        req,
-        "branchCreateRequest",
-        "json"
-      );
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        throw new Error(`Error serializing request body, cause: ${e.message}`);
-      }
-    }
-
-    const client: AxiosInstance = this._securityClient || this._defaultClient;
-
-    const headers = { ...reqBodyHeaders, ...config?.headers };
-    headers["Accept"] = "application/json;q=1, application/json;q=0";
-    headers[
-      "user-agent"
-    ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
-
-    const httpRes: AxiosResponse = await client.request({
-      validateStatus: () => true,
-      url: url,
-      method: "post",
-      headers: headers,
-      data: reqBody,
-      ...config,
-    });
-
-    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-    if (httpRes?.status == null) {
-      throw new Error(`status code not found in response: ${httpRes}`);
-    }
-
-    const res: operations.CreateProjectBranchResponse =
-      new operations.CreateProjectBranchResponse({
-        statusCode: httpRes.status,
-        contentType: contentType,
-        rawResponse: httpRes,
-      });
-    switch (true) {
-      case httpRes?.status == 201:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.createProjectBranch201ApplicationJSONObject = utils.objectToClass(
-            httpRes?.data,
-            operations.CreateProjectBranch201ApplicationJSON
-          );
+    /**
+     * Create a branch
+     *
+     * @remarks
+     * Creates a branch in the specified project.
+     * You can obtain a `project_id` by listing the projects for your Neon account.
+     *
+     * This method does not require a request body, but you can specify one to create an endpoint for the branch or to select a non-default parent branch.
+     * The default behavior is to create a branch from the project's root branch (`main`) with no endpoint, and the branch name is auto-generated.
+     * For related information, see [Manage branches](https://neon.tech/docs/manage/branches/).
+     *
+     */
+    async createProjectBranch(
+        req: operations.CreateProjectBranchRequest,
+        config?: AxiosRequestConfig
+    ): Promise<operations.CreateProjectBranchResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.CreateProjectBranchRequest(req);
         }
-        break;
-      default:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.generalError = utils.objectToClass(
-            httpRes?.data,
-            shared.GeneralError
-          );
+
+        const baseURL: string = this._serverURL;
+        const url: string = utils.generateURL(baseURL, "/projects/{project_id}/branches", req);
+
+        let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+        try {
+            [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
+                req,
+                "branchCreateRequest",
+                "json"
+            );
+        } catch (e: unknown) {
+            if (e instanceof Error) {
+                throw new Error(`Error serializing request body, cause: ${e.message}`);
+            }
         }
-        break;
-    }
 
-    return res;
-  }
+        const client: AxiosInstance = this._securityClient || this._defaultClient;
 
-  /**
-   * Create a database
-   *
-   * @remarks
-   * Creates a database in the specified branch.
-   * A branch can have multiple databases.
-   * You can obtain a `project_id` by listing the projects for your Neon account.
-   * You can obtain the `branch_id` by listing the project's branches.
-   * For related information, see [Manage databases](https://neon.tech/docs/manage/databases/).
-   *
-   */
-  async createProjectBranchDatabase(
-    req: operations.CreateProjectBranchDatabaseRequest,
-    config?: AxiosRequestConfig
-  ): Promise<operations.CreateProjectBranchDatabaseResponse> {
-    if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.CreateProjectBranchDatabaseRequest(req);
-    }
+        const headers = { ...reqBodyHeaders, ...config?.headers };
+        headers["Accept"] = "application/json;q=1, application/json;q=0";
+        headers[
+            "user-agent"
+        ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
 
-    const baseURL: string = this._serverURL;
-    const url: string = utils.generateURL(
-      baseURL,
-      "/projects/{project_id}/branches/{branch_id}/databases",
-      req
-    );
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: url,
+            method: "post",
+            headers: headers,
+            data: reqBody,
+            ...config,
+        });
 
-    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-    try {
-      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
-        req,
-        "databaseCreateRequest",
-        "json"
-      );
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        throw new Error(`Error serializing request body, cause: ${e.message}`);
-      }
-    }
-
-    const client: AxiosInstance = this._securityClient || this._defaultClient;
-
-    const headers = { ...reqBodyHeaders, ...config?.headers };
-    if (reqBody == null || Object.keys(reqBody).length === 0)
-      throw new Error("request body is required");
-    headers["Accept"] = "application/json;q=1, application/json;q=0";
-    headers[
-      "user-agent"
-    ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
-
-    const httpRes: AxiosResponse = await client.request({
-      validateStatus: () => true,
-      url: url,
-      method: "post",
-      headers: headers,
-      data: reqBody,
-      ...config,
-    });
-
-    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-    if (httpRes?.status == null) {
-      throw new Error(`status code not found in response: ${httpRes}`);
-    }
-
-    const res: operations.CreateProjectBranchDatabaseResponse =
-      new operations.CreateProjectBranchDatabaseResponse({
-        statusCode: httpRes.status,
-        contentType: contentType,
-        rawResponse: httpRes,
-      });
-    switch (true) {
-      case httpRes?.status == 201:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.databaseOperations = utils.objectToClass(
-            httpRes?.data,
-            shared.DatabaseOperations
-          );
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
         }
-        break;
-      default:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.generalError = utils.objectToClass(
-            httpRes?.data,
-            shared.GeneralError
-          );
+
+        const res: operations.CreateProjectBranchResponse =
+            new operations.CreateProjectBranchResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes,
+            });
+        switch (true) {
+            case httpRes?.status == 201:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.createProjectBranch201ApplicationJSONObject = utils.objectToClass(
+                        httpRes?.data,
+                        operations.CreateProjectBranch201ApplicationJSON
+                    );
+                }
+                break;
+            default:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.generalError = utils.objectToClass(httpRes?.data, shared.GeneralError);
+                }
+                break;
         }
-        break;
+
+        return res;
     }
 
-    return res;
-  }
-
-  /**
-   * Create a role
-   *
-   * @remarks
-   * Creates a role in the specified branch.
-   * You can obtain a `project_id` by listing the projects for your Neon account.
-   * You can obtain the `branch_id` by listing the project's branches.
-   * In Neon, the terms "role" and "user" are synonymous.
-   * For related information, see [Manage users](https://neon.tech/docs/manage/users/).
-   *
-   * Connections established to the active read-write endpoint will be dropped.
-   * If the read-write endpoint is idle, the endpoint becomes active for a short period of time and is suspended afterward.
-   *
-   */
-  async createProjectBranchRole(
-    req: operations.CreateProjectBranchRoleRequest,
-    config?: AxiosRequestConfig
-  ): Promise<operations.CreateProjectBranchRoleResponse> {
-    if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.CreateProjectBranchRoleRequest(req);
-    }
-
-    const baseURL: string = this._serverURL;
-    const url: string = utils.generateURL(
-      baseURL,
-      "/projects/{project_id}/branches/{branch_id}/roles",
-      req
-    );
-
-    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
-
-    try {
-      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
-        req,
-        "roleCreateRequest",
-        "json"
-      );
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        throw new Error(`Error serializing request body, cause: ${e.message}`);
-      }
-    }
-
-    const client: AxiosInstance = this._securityClient || this._defaultClient;
-
-    const headers = { ...reqBodyHeaders, ...config?.headers };
-    if (reqBody == null || Object.keys(reqBody).length === 0)
-      throw new Error("request body is required");
-    headers["Accept"] = "application/json;q=1, application/json;q=0";
-    headers[
-      "user-agent"
-    ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
-
-    const httpRes: AxiosResponse = await client.request({
-      validateStatus: () => true,
-      url: url,
-      method: "post",
-      headers: headers,
-      data: reqBody,
-      ...config,
-    });
-
-    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-    if (httpRes?.status == null) {
-      throw new Error(`status code not found in response: ${httpRes}`);
-    }
-
-    const res: operations.CreateProjectBranchRoleResponse =
-      new operations.CreateProjectBranchRoleResponse({
-        statusCode: httpRes.status,
-        contentType: contentType,
-        rawResponse: httpRes,
-      });
-    switch (true) {
-      case httpRes?.status == 201:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.roleOperations = utils.objectToClass(
-            httpRes?.data,
-            shared.RoleOperations
-          );
+    /**
+     * Create a database
+     *
+     * @remarks
+     * Creates a database in the specified branch.
+     * A branch can have multiple databases.
+     * You can obtain a `project_id` by listing the projects for your Neon account.
+     * You can obtain the `branch_id` by listing the project's branches.
+     * For related information, see [Manage databases](https://neon.tech/docs/manage/databases/).
+     *
+     */
+    async createProjectBranchDatabase(
+        req: operations.CreateProjectBranchDatabaseRequest,
+        config?: AxiosRequestConfig
+    ): Promise<operations.CreateProjectBranchDatabaseResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.CreateProjectBranchDatabaseRequest(req);
         }
-        break;
-      default:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.generalError = utils.objectToClass(
-            httpRes?.data,
-            shared.GeneralError
-          );
+
+        const baseURL: string = this._serverURL;
+        const url: string = utils.generateURL(
+            baseURL,
+            "/projects/{project_id}/branches/{branch_id}/databases",
+            req
+        );
+
+        let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+        try {
+            [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
+                req,
+                "databaseCreateRequest",
+                "json"
+            );
+        } catch (e: unknown) {
+            if (e instanceof Error) {
+                throw new Error(`Error serializing request body, cause: ${e.message}`);
+            }
         }
-        break;
-    }
 
-    return res;
-  }
+        const client: AxiosInstance = this._securityClient || this._defaultClient;
 
-  /**
-   * Delete a branch
-   *
-   * @remarks
-   * Deletes the specified branch from a project, and places
-   * all endpoints into an idle state, breaking existing client connections.
-   * You can obtain a `project_id` by listing the projects for your Neon account.
-   * You can obtain a `branch_id` by listing the project's branches.
-   * For related information, see [Manage branches](https://neon.tech/docs/manage/branches/).
-   *
-   * When a successful response status is received, the endpoints are still active,
-   * and the branch is not yet deleted from storage.
-   * The deletion occurs after all operations finish.
-   * You cannot delete a branch if it is the only remaining branch in the project.
-   * A project must have at least one branch.
-   *
-   */
-  async deleteProjectBranch(
-    req: operations.DeleteProjectBranchRequest,
-    config?: AxiosRequestConfig
-  ): Promise<operations.DeleteProjectBranchResponse> {
-    if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.DeleteProjectBranchRequest(req);
-    }
+        const headers = { ...reqBodyHeaders, ...config?.headers };
+        if (reqBody == null || Object.keys(reqBody).length === 0)
+            throw new Error("request body is required");
+        headers["Accept"] = "application/json;q=1, application/json;q=0";
+        headers[
+            "user-agent"
+        ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
 
-    const baseURL: string = this._serverURL;
-    const url: string = utils.generateURL(
-      baseURL,
-      "/projects/{project_id}/branches/{branch_id}",
-      req
-    );
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: url,
+            method: "post",
+            headers: headers,
+            data: reqBody,
+            ...config,
+        });
 
-    const client: AxiosInstance = this._securityClient || this._defaultClient;
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-    const headers = { ...config?.headers };
-    headers["Accept"] = "application/json;q=1, application/json;q=0";
-    headers[
-      "user-agent"
-    ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
-
-    const httpRes: AxiosResponse = await client.request({
-      validateStatus: () => true,
-      url: url,
-      method: "delete",
-      headers: headers,
-      ...config,
-    });
-
-    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-    if (httpRes?.status == null) {
-      throw new Error(`status code not found in response: ${httpRes}`);
-    }
-
-    const res: operations.DeleteProjectBranchResponse =
-      new operations.DeleteProjectBranchResponse({
-        statusCode: httpRes.status,
-        contentType: contentType,
-        rawResponse: httpRes,
-      });
-    switch (true) {
-      case httpRes?.status == 200:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.branchOperations = utils.objectToClass(
-            httpRes?.data,
-            shared.BranchOperations
-          );
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
         }
-        break;
-      default:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.generalError = utils.objectToClass(
-            httpRes?.data,
-            shared.GeneralError
-          );
+
+        const res: operations.CreateProjectBranchDatabaseResponse =
+            new operations.CreateProjectBranchDatabaseResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes,
+            });
+        switch (true) {
+            case httpRes?.status == 201:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.databaseOperations = utils.objectToClass(
+                        httpRes?.data,
+                        shared.DatabaseOperations
+                    );
+                }
+                break;
+            default:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.generalError = utils.objectToClass(httpRes?.data, shared.GeneralError);
+                }
+                break;
         }
-        break;
+
+        return res;
     }
 
-    return res;
-  }
-
-  /**
-   * Delete a database
-   *
-   * @remarks
-   * Deletes the specified database from the branch.
-   * You can obtain a `project_id` by listing the projects for your Neon account.
-   * You can obtain the `branch_id` and `database_name` by listing branch's databases.
-   * For related information, see [Manage databases](https://neon.tech/docs/manage/databases/).
-   *
-   */
-  async deleteProjectBranchDatabase(
-    req: operations.DeleteProjectBranchDatabaseRequest,
-    config?: AxiosRequestConfig
-  ): Promise<operations.DeleteProjectBranchDatabaseResponse> {
-    if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.DeleteProjectBranchDatabaseRequest(req);
-    }
-
-    const baseURL: string = this._serverURL;
-    const url: string = utils.generateURL(
-      baseURL,
-      "/projects/{project_id}/branches/{branch_id}/databases/{database_name}",
-      req
-    );
-
-    const client: AxiosInstance = this._securityClient || this._defaultClient;
-
-    const headers = { ...config?.headers };
-    headers["Accept"] = "application/json;q=1, application/json;q=0";
-    headers[
-      "user-agent"
-    ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
-
-    const httpRes: AxiosResponse = await client.request({
-      validateStatus: () => true,
-      url: url,
-      method: "delete",
-      headers: headers,
-      ...config,
-    });
-
-    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-    if (httpRes?.status == null) {
-      throw new Error(`status code not found in response: ${httpRes}`);
-    }
-
-    const res: operations.DeleteProjectBranchDatabaseResponse =
-      new operations.DeleteProjectBranchDatabaseResponse({
-        statusCode: httpRes.status,
-        contentType: contentType,
-        rawResponse: httpRes,
-      });
-    switch (true) {
-      case httpRes?.status == 200:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.databaseOperations = utils.objectToClass(
-            httpRes?.data,
-            shared.DatabaseOperations
-          );
+    /**
+     * Create a role
+     *
+     * @remarks
+     * Creates a role in the specified branch.
+     * You can obtain a `project_id` by listing the projects for your Neon account.
+     * You can obtain the `branch_id` by listing the project's branches.
+     * In Neon, the terms "role" and "user" are synonymous.
+     * For related information, see [Manage users](https://neon.tech/docs/manage/users/).
+     *
+     * Connections established to the active read-write endpoint will be dropped.
+     * If the read-write endpoint is idle, the endpoint becomes active for a short period of time and is suspended afterward.
+     *
+     */
+    async createProjectBranchRole(
+        req: operations.CreateProjectBranchRoleRequest,
+        config?: AxiosRequestConfig
+    ): Promise<operations.CreateProjectBranchRoleResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.CreateProjectBranchRoleRequest(req);
         }
-        break;
-      default:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.generalError = utils.objectToClass(
-            httpRes?.data,
-            shared.GeneralError
-          );
+
+        const baseURL: string = this._serverURL;
+        const url: string = utils.generateURL(
+            baseURL,
+            "/projects/{project_id}/branches/{branch_id}/roles",
+            req
+        );
+
+        let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+        try {
+            [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
+                req,
+                "roleCreateRequest",
+                "json"
+            );
+        } catch (e: unknown) {
+            if (e instanceof Error) {
+                throw new Error(`Error serializing request body, cause: ${e.message}`);
+            }
         }
-        break;
-    }
 
-    return res;
-  }
+        const client: AxiosInstance = this._securityClient || this._defaultClient;
 
-  /**
-   * Delete a role
-   *
-   * @remarks
-   * Deletes the specified role from the branch.
-   * You can obtain a `project_id` by listing the projects for your Neon account.
-   * You can obtain the `branch_id` by listing the project's branches.
-   * You can obtain the `role_name` by listing the roles for a branch.
-   * In Neon, the terms "role" and "user" are synonymous.
-   * For related information, see [Managing users](https://neon.tech/docs/manage/users/).
-   *
-   */
-  async deleteProjectBranchRole(
-    req: operations.DeleteProjectBranchRoleRequest,
-    config?: AxiosRequestConfig
-  ): Promise<operations.DeleteProjectBranchRoleResponse> {
-    if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.DeleteProjectBranchRoleRequest(req);
-    }
+        const headers = { ...reqBodyHeaders, ...config?.headers };
+        if (reqBody == null || Object.keys(reqBody).length === 0)
+            throw new Error("request body is required");
+        headers["Accept"] = "application/json;q=1, application/json;q=0";
+        headers[
+            "user-agent"
+        ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
 
-    const baseURL: string = this._serverURL;
-    const url: string = utils.generateURL(
-      baseURL,
-      "/projects/{project_id}/branches/{branch_id}/roles/{role_name}",
-      req
-    );
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: url,
+            method: "post",
+            headers: headers,
+            data: reqBody,
+            ...config,
+        });
 
-    const client: AxiosInstance = this._securityClient || this._defaultClient;
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-    const headers = { ...config?.headers };
-    headers["Accept"] = "application/json;q=1, application/json;q=0";
-    headers[
-      "user-agent"
-    ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
-
-    const httpRes: AxiosResponse = await client.request({
-      validateStatus: () => true,
-      url: url,
-      method: "delete",
-      headers: headers,
-      ...config,
-    });
-
-    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-    if (httpRes?.status == null) {
-      throw new Error(`status code not found in response: ${httpRes}`);
-    }
-
-    const res: operations.DeleteProjectBranchRoleResponse =
-      new operations.DeleteProjectBranchRoleResponse({
-        statusCode: httpRes.status,
-        contentType: contentType,
-        rawResponse: httpRes,
-      });
-    switch (true) {
-      case httpRes?.status == 200:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.roleOperations = utils.objectToClass(
-            httpRes?.data,
-            shared.RoleOperations
-          );
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
         }
-        break;
-      default:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.generalError = utils.objectToClass(
-            httpRes?.data,
-            shared.GeneralError
-          );
+
+        const res: operations.CreateProjectBranchRoleResponse =
+            new operations.CreateProjectBranchRoleResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes,
+            });
+        switch (true) {
+            case httpRes?.status == 201:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.roleOperations = utils.objectToClass(httpRes?.data, shared.RoleOperations);
+                }
+                break;
+            default:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.generalError = utils.objectToClass(httpRes?.data, shared.GeneralError);
+                }
+                break;
         }
-        break;
+
+        return res;
     }
 
-    return res;
-  }
-
-  /**
-   * Get branch details
-   *
-   * @remarks
-   * Retrieves information about the specified branch.
-   * You can obtain a `project_id` by listing the projects for your Neon account.
-   * You can obtain a `branch_id` by listing the project's branches.
-   * A `branch_id` value has a `br-` prefix.
-   *
-   * Each Neon project has a root branch named `main`.
-   * A project may contain child branches that were branched from `main` or from another branch.
-   * A parent branch is identified by a `parent_id` value, which is the `id` of the parent branch.
-   * For related information, see [Manage branches](https://neon.tech/docs/manage/branches/).
-   *
-   */
-  async getProjectBranch(
-    req: operations.GetProjectBranchRequest,
-    config?: AxiosRequestConfig
-  ): Promise<operations.GetProjectBranchResponse> {
-    if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.GetProjectBranchRequest(req);
-    }
-
-    const baseURL: string = this._serverURL;
-    const url: string = utils.generateURL(
-      baseURL,
-      "/projects/{project_id}/branches/{branch_id}",
-      req
-    );
-
-    const client: AxiosInstance = this._securityClient || this._defaultClient;
-
-    const headers = { ...config?.headers };
-    headers["Accept"] = "application/json;q=1, application/json;q=0";
-    headers[
-      "user-agent"
-    ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
-
-    const httpRes: AxiosResponse = await client.request({
-      validateStatus: () => true,
-      url: url,
-      method: "get",
-      headers: headers,
-      ...config,
-    });
-
-    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-    if (httpRes?.status == null) {
-      throw new Error(`status code not found in response: ${httpRes}`);
-    }
-
-    const res: operations.GetProjectBranchResponse =
-      new operations.GetProjectBranchResponse({
-        statusCode: httpRes.status,
-        contentType: contentType,
-        rawResponse: httpRes,
-      });
-    switch (true) {
-      case httpRes?.status == 200:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.branchResponse = utils.objectToClass(
-            httpRes?.data,
-            shared.BranchResponse
-          );
+    /**
+     * Delete a branch
+     *
+     * @remarks
+     * Deletes the specified branch from a project, and places
+     * all endpoints into an idle state, breaking existing client connections.
+     * You can obtain a `project_id` by listing the projects for your Neon account.
+     * You can obtain a `branch_id` by listing the project's branches.
+     * For related information, see [Manage branches](https://neon.tech/docs/manage/branches/).
+     *
+     * When a successful response status is received, the endpoints are still active,
+     * and the branch is not yet deleted from storage.
+     * The deletion occurs after all operations finish.
+     * You cannot delete a branch if it is the only remaining branch in the project.
+     * A project must have at least one branch.
+     *
+     */
+    async deleteProjectBranch(
+        req: operations.DeleteProjectBranchRequest,
+        config?: AxiosRequestConfig
+    ): Promise<operations.DeleteProjectBranchResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.DeleteProjectBranchRequest(req);
         }
-        break;
-      default:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.generalError = utils.objectToClass(
-            httpRes?.data,
-            shared.GeneralError
-          );
+
+        const baseURL: string = this._serverURL;
+        const url: string = utils.generateURL(
+            baseURL,
+            "/projects/{project_id}/branches/{branch_id}",
+            req
+        );
+
+        const client: AxiosInstance = this._securityClient || this._defaultClient;
+
+        const headers = { ...config?.headers };
+        headers["Accept"] = "application/json;q=1, application/json;q=0";
+        headers[
+            "user-agent"
+        ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
+
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: url,
+            method: "delete",
+            headers: headers,
+            ...config,
+        });
+
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
         }
-        break;
-    }
 
-    return res;
-  }
-
-  /**
-   * Get database details
-   *
-   * @remarks
-   * Retrieves information about the specified database.
-   * You can obtain a `project_id` by listing the projects for your Neon account.
-   * You can obtain the `branch_id` and `database_name` by listing branch's databases.
-   * For related information, see [Manage databases](https://neon.tech/docs/manage/databases/).
-   *
-   */
-  async getProjectBranchDatabase(
-    req: operations.GetProjectBranchDatabaseRequest,
-    config?: AxiosRequestConfig
-  ): Promise<operations.GetProjectBranchDatabaseResponse> {
-    if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.GetProjectBranchDatabaseRequest(req);
-    }
-
-    const baseURL: string = this._serverURL;
-    const url: string = utils.generateURL(
-      baseURL,
-      "/projects/{project_id}/branches/{branch_id}/databases/{database_name}",
-      req
-    );
-
-    const client: AxiosInstance = this._securityClient || this._defaultClient;
-
-    const headers = { ...config?.headers };
-    headers["Accept"] = "application/json;q=1, application/json;q=0";
-    headers[
-      "user-agent"
-    ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
-
-    const httpRes: AxiosResponse = await client.request({
-      validateStatus: () => true,
-      url: url,
-      method: "get",
-      headers: headers,
-      ...config,
-    });
-
-    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-    if (httpRes?.status == null) {
-      throw new Error(`status code not found in response: ${httpRes}`);
-    }
-
-    const res: operations.GetProjectBranchDatabaseResponse =
-      new operations.GetProjectBranchDatabaseResponse({
-        statusCode: httpRes.status,
-        contentType: contentType,
-        rawResponse: httpRes,
-      });
-    switch (true) {
-      case httpRes?.status == 200:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.databaseResponse = utils.objectToClass(
-            httpRes?.data,
-            shared.DatabaseResponse
-          );
+        const res: operations.DeleteProjectBranchResponse =
+            new operations.DeleteProjectBranchResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes,
+            });
+        switch (true) {
+            case httpRes?.status == 200:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.branchOperations = utils.objectToClass(
+                        httpRes?.data,
+                        shared.BranchOperations
+                    );
+                }
+                break;
+            default:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.generalError = utils.objectToClass(httpRes?.data, shared.GeneralError);
+                }
+                break;
         }
-        break;
-      default:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.generalError = utils.objectToClass(
-            httpRes?.data,
-            shared.GeneralError
-          );
+
+        return res;
+    }
+
+    /**
+     * Delete a database
+     *
+     * @remarks
+     * Deletes the specified database from the branch.
+     * You can obtain a `project_id` by listing the projects for your Neon account.
+     * You can obtain the `branch_id` and `database_name` by listing branch's databases.
+     * For related information, see [Manage databases](https://neon.tech/docs/manage/databases/).
+     *
+     */
+    async deleteProjectBranchDatabase(
+        req: operations.DeleteProjectBranchDatabaseRequest,
+        config?: AxiosRequestConfig
+    ): Promise<operations.DeleteProjectBranchDatabaseResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.DeleteProjectBranchDatabaseRequest(req);
         }
-        break;
-    }
 
-    return res;
-  }
+        const baseURL: string = this._serverURL;
+        const url: string = utils.generateURL(
+            baseURL,
+            "/projects/{project_id}/branches/{branch_id}/databases/{database_name}",
+            req
+        );
 
-  /**
-   * Get role details
-   *
-   * @remarks
-   * Retrieves details about the specified role.
-   * You can obtain a `project_id` by listing the projects for your Neon account.
-   * You can obtain the `branch_id` by listing the project's branches.
-   * You can obtain the `role_name` by listing the roles for a branch.
-   * In Neon, the terms "role" and "user" are synonymous.
-   * For related information, see [Managing users](https://neon.tech/docs/manage/users/).
-   *
-   */
-  async getProjectBranchRole(
-    req: operations.GetProjectBranchRoleRequest,
-    config?: AxiosRequestConfig
-  ): Promise<operations.GetProjectBranchRoleResponse> {
-    if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.GetProjectBranchRoleRequest(req);
-    }
+        const client: AxiosInstance = this._securityClient || this._defaultClient;
 
-    const baseURL: string = this._serverURL;
-    const url: string = utils.generateURL(
-      baseURL,
-      "/projects/{project_id}/branches/{branch_id}/roles/{role_name}",
-      req
-    );
+        const headers = { ...config?.headers };
+        headers["Accept"] = "application/json;q=1, application/json;q=0";
+        headers[
+            "user-agent"
+        ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
 
-    const client: AxiosInstance = this._securityClient || this._defaultClient;
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: url,
+            method: "delete",
+            headers: headers,
+            ...config,
+        });
 
-    const headers = { ...config?.headers };
-    headers["Accept"] = "application/json;q=1, application/json;q=0";
-    headers[
-      "user-agent"
-    ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-    const httpRes: AxiosResponse = await client.request({
-      validateStatus: () => true,
-      url: url,
-      method: "get",
-      headers: headers,
-      ...config,
-    });
-
-    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-    if (httpRes?.status == null) {
-      throw new Error(`status code not found in response: ${httpRes}`);
-    }
-
-    const res: operations.GetProjectBranchRoleResponse =
-      new operations.GetProjectBranchRoleResponse({
-        statusCode: httpRes.status,
-        contentType: contentType,
-        rawResponse: httpRes,
-      });
-    switch (true) {
-      case httpRes?.status == 200:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.roleResponse = utils.objectToClass(
-            httpRes?.data,
-            shared.RoleResponse
-          );
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
         }
-        break;
-      default:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.generalError = utils.objectToClass(
-            httpRes?.data,
-            shared.GeneralError
-          );
+
+        const res: operations.DeleteProjectBranchDatabaseResponse =
+            new operations.DeleteProjectBranchDatabaseResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes,
+            });
+        switch (true) {
+            case httpRes?.status == 200:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.databaseOperations = utils.objectToClass(
+                        httpRes?.data,
+                        shared.DatabaseOperations
+                    );
+                }
+                break;
+            default:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.generalError = utils.objectToClass(httpRes?.data, shared.GeneralError);
+                }
+                break;
         }
-        break;
+
+        return res;
     }
 
-    return res;
-  }
-
-  /**
-   * Get role password
-   *
-   * @remarks
-   * Retrieves password of the specified role if possible.
-   * You can obtain a `project_id` by listing the projects for your Neon account.
-   * You can obtain the `branch_id` by listing the project's branches.
-   * You can obtain the `role_name` by listing the roles for a branch.
-   * In Neon, the terms "role" and "user" are synonymous.
-   * For related information, see [Managing users](https://neon.tech/docs/manage/users/).
-   *
-   */
-  async getProjectBranchRolePassword(
-    req: operations.GetProjectBranchRolePasswordRequest,
-    config?: AxiosRequestConfig
-  ): Promise<operations.GetProjectBranchRolePasswordResponse> {
-    if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.GetProjectBranchRolePasswordRequest(req);
-    }
-
-    const baseURL: string = this._serverURL;
-    const url: string = utils.generateURL(
-      baseURL,
-      "/projects/{project_id}/branches/{branch_id}/roles/{role_name}/reveal_password",
-      req
-    );
-
-    const client: AxiosInstance = this._securityClient || this._defaultClient;
-
-    const headers = { ...config?.headers };
-    headers["Accept"] = "application/json;q=1, application/json;q=0";
-    headers[
-      "user-agent"
-    ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
-
-    const httpRes: AxiosResponse = await client.request({
-      validateStatus: () => true,
-      url: url,
-      method: "get",
-      headers: headers,
-      ...config,
-    });
-
-    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-    if (httpRes?.status == null) {
-      throw new Error(`status code not found in response: ${httpRes}`);
-    }
-
-    const res: operations.GetProjectBranchRolePasswordResponse =
-      new operations.GetProjectBranchRolePasswordResponse({
-        statusCode: httpRes.status,
-        contentType: contentType,
-        rawResponse: httpRes,
-      });
-    switch (true) {
-      case httpRes?.status == 200:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.rolePasswordResponse = utils.objectToClass(
-            httpRes?.data,
-            shared.RolePasswordResponse
-          );
+    /**
+     * Delete a role
+     *
+     * @remarks
+     * Deletes the specified role from the branch.
+     * You can obtain a `project_id` by listing the projects for your Neon account.
+     * You can obtain the `branch_id` by listing the project's branches.
+     * You can obtain the `role_name` by listing the roles for a branch.
+     * In Neon, the terms "role" and "user" are synonymous.
+     * For related information, see [Managing users](https://neon.tech/docs/manage/users/).
+     *
+     */
+    async deleteProjectBranchRole(
+        req: operations.DeleteProjectBranchRoleRequest,
+        config?: AxiosRequestConfig
+    ): Promise<operations.DeleteProjectBranchRoleResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.DeleteProjectBranchRoleRequest(req);
         }
-        break;
-      default:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.generalError = utils.objectToClass(
-            httpRes?.data,
-            shared.GeneralError
-          );
+
+        const baseURL: string = this._serverURL;
+        const url: string = utils.generateURL(
+            baseURL,
+            "/projects/{project_id}/branches/{branch_id}/roles/{role_name}",
+            req
+        );
+
+        const client: AxiosInstance = this._securityClient || this._defaultClient;
+
+        const headers = { ...config?.headers };
+        headers["Accept"] = "application/json;q=1, application/json;q=0";
+        headers[
+            "user-agent"
+        ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
+
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: url,
+            method: "delete",
+            headers: headers,
+            ...config,
+        });
+
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
         }
-        break;
-    }
 
-    return res;
-  }
-
-  /**
-   * Get a list of databases
-   *
-   * @remarks
-   * Retrieves a list of databases for the specified branch.
-   * A branch can have multiple databases.
-   * You can obtain a `project_id` by listing the projects for your Neon account.
-   * You can obtain the `branch_id` by listing the project's branches.
-   * For related information, see [Manage databases](https://neon.tech/docs/manage/databases/).
-   *
-   */
-  async listProjectBranchDatabases(
-    req: operations.ListProjectBranchDatabasesRequest,
-    config?: AxiosRequestConfig
-  ): Promise<operations.ListProjectBranchDatabasesResponse> {
-    if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.ListProjectBranchDatabasesRequest(req);
-    }
-
-    const baseURL: string = this._serverURL;
-    const url: string = utils.generateURL(
-      baseURL,
-      "/projects/{project_id}/branches/{branch_id}/databases",
-      req
-    );
-
-    const client: AxiosInstance = this._securityClient || this._defaultClient;
-
-    const headers = { ...config?.headers };
-    headers["Accept"] = "application/json;q=1, application/json;q=0";
-    headers[
-      "user-agent"
-    ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
-
-    const httpRes: AxiosResponse = await client.request({
-      validateStatus: () => true,
-      url: url,
-      method: "get",
-      headers: headers,
-      ...config,
-    });
-
-    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-    if (httpRes?.status == null) {
-      throw new Error(`status code not found in response: ${httpRes}`);
-    }
-
-    const res: operations.ListProjectBranchDatabasesResponse =
-      new operations.ListProjectBranchDatabasesResponse({
-        statusCode: httpRes.status,
-        contentType: contentType,
-        rawResponse: httpRes,
-      });
-    switch (true) {
-      case httpRes?.status == 200:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.databasesResponse = utils.objectToClass(
-            httpRes?.data,
-            shared.DatabasesResponse
-          );
+        const res: operations.DeleteProjectBranchRoleResponse =
+            new operations.DeleteProjectBranchRoleResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes,
+            });
+        switch (true) {
+            case httpRes?.status == 200:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.roleOperations = utils.objectToClass(httpRes?.data, shared.RoleOperations);
+                }
+                break;
+            default:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.generalError = utils.objectToClass(httpRes?.data, shared.GeneralError);
+                }
+                break;
         }
-        break;
-      default:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.generalError = utils.objectToClass(
-            httpRes?.data,
-            shared.GeneralError
-          );
+
+        return res;
+    }
+
+    /**
+     * Get branch details
+     *
+     * @remarks
+     * Retrieves information about the specified branch.
+     * You can obtain a `project_id` by listing the projects for your Neon account.
+     * You can obtain a `branch_id` by listing the project's branches.
+     * A `branch_id` value has a `br-` prefix.
+     *
+     * Each Neon project has a root branch named `main`.
+     * A project may contain child branches that were branched from `main` or from another branch.
+     * A parent branch is identified by a `parent_id` value, which is the `id` of the parent branch.
+     * For related information, see [Manage branches](https://neon.tech/docs/manage/branches/).
+     *
+     */
+    async getProjectBranch(
+        req: operations.GetProjectBranchRequest,
+        config?: AxiosRequestConfig
+    ): Promise<operations.GetProjectBranchResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.GetProjectBranchRequest(req);
         }
-        break;
-    }
 
-    return res;
-  }
+        const baseURL: string = this._serverURL;
+        const url: string = utils.generateURL(
+            baseURL,
+            "/projects/{project_id}/branches/{branch_id}",
+            req
+        );
 
-  /**
-   * Get a list of branch endpoints
-   *
-   * @remarks
-   * Retrieves a list of endpoints for the specified branch.
-   * Currently, Neon permits only one endpoint per branch.
-   * You can obtain a `project_id` by listing the projects for your Neon account.
-   * You can obtain the `branch_id` by listing the project's branches.
-   *
-   */
-  async listProjectBranchEndpoints(
-    req: operations.ListProjectBranchEndpointsRequest,
-    config?: AxiosRequestConfig
-  ): Promise<operations.ListProjectBranchEndpointsResponse> {
-    if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.ListProjectBranchEndpointsRequest(req);
-    }
+        const client: AxiosInstance = this._securityClient || this._defaultClient;
 
-    const baseURL: string = this._serverURL;
-    const url: string = utils.generateURL(
-      baseURL,
-      "/projects/{project_id}/branches/{branch_id}/endpoints",
-      req
-    );
+        const headers = { ...config?.headers };
+        headers["Accept"] = "application/json;q=1, application/json;q=0";
+        headers[
+            "user-agent"
+        ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
 
-    const client: AxiosInstance = this._securityClient || this._defaultClient;
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: url,
+            method: "get",
+            headers: headers,
+            ...config,
+        });
 
-    const headers = { ...config?.headers };
-    headers["Accept"] = "application/json;q=1, application/json;q=0";
-    headers[
-      "user-agent"
-    ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-    const httpRes: AxiosResponse = await client.request({
-      validateStatus: () => true,
-      url: url,
-      method: "get",
-      headers: headers,
-      ...config,
-    });
-
-    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-    if (httpRes?.status == null) {
-      throw new Error(`status code not found in response: ${httpRes}`);
-    }
-
-    const res: operations.ListProjectBranchEndpointsResponse =
-      new operations.ListProjectBranchEndpointsResponse({
-        statusCode: httpRes.status,
-        contentType: contentType,
-        rawResponse: httpRes,
-      });
-    switch (true) {
-      case httpRes?.status == 200:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.endpointsResponse = utils.objectToClass(
-            httpRes?.data,
-            shared.EndpointsResponse
-          );
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
         }
-        break;
-      default:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.generalError = utils.objectToClass(
-            httpRes?.data,
-            shared.GeneralError
-          );
+
+        const res: operations.GetProjectBranchResponse = new operations.GetProjectBranchResponse({
+            statusCode: httpRes.status,
+            contentType: contentType,
+            rawResponse: httpRes,
+        });
+        switch (true) {
+            case httpRes?.status == 200:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.branchResponse = utils.objectToClass(httpRes?.data, shared.BranchResponse);
+                }
+                break;
+            default:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.generalError = utils.objectToClass(httpRes?.data, shared.GeneralError);
+                }
+                break;
         }
-        break;
+
+        return res;
     }
 
-    return res;
-  }
-
-  /**
-   * Get a list of roles
-   *
-   * @remarks
-   * Retrieves a list of roles from the specified branch.
-   * You can obtain a `project_id` by listing the projects for your Neon account.
-   * You can obtain the `branch_id` by listing the project's branches.
-   * In Neon, the terms "role" and "user" are synonymous.
-   * For related information, see [Manage users](https://neon.tech/docs/manage/users/).
-   *
-   */
-  async listProjectBranchRoles(
-    req: operations.ListProjectBranchRolesRequest,
-    config?: AxiosRequestConfig
-  ): Promise<operations.ListProjectBranchRolesResponse> {
-    if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.ListProjectBranchRolesRequest(req);
-    }
-
-    const baseURL: string = this._serverURL;
-    const url: string = utils.generateURL(
-      baseURL,
-      "/projects/{project_id}/branches/{branch_id}/roles",
-      req
-    );
-
-    const client: AxiosInstance = this._securityClient || this._defaultClient;
-
-    const headers = { ...config?.headers };
-    headers["Accept"] = "application/json;q=1, application/json;q=0";
-    headers[
-      "user-agent"
-    ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
-
-    const httpRes: AxiosResponse = await client.request({
-      validateStatus: () => true,
-      url: url,
-      method: "get",
-      headers: headers,
-      ...config,
-    });
-
-    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-    if (httpRes?.status == null) {
-      throw new Error(`status code not found in response: ${httpRes}`);
-    }
-
-    const res: operations.ListProjectBranchRolesResponse =
-      new operations.ListProjectBranchRolesResponse({
-        statusCode: httpRes.status,
-        contentType: contentType,
-        rawResponse: httpRes,
-      });
-    switch (true) {
-      case httpRes?.status == 200:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.rolesResponse = utils.objectToClass(
-            httpRes?.data,
-            shared.RolesResponse
-          );
+    /**
+     * Get database details
+     *
+     * @remarks
+     * Retrieves information about the specified database.
+     * You can obtain a `project_id` by listing the projects for your Neon account.
+     * You can obtain the `branch_id` and `database_name` by listing branch's databases.
+     * For related information, see [Manage databases](https://neon.tech/docs/manage/databases/).
+     *
+     */
+    async getProjectBranchDatabase(
+        req: operations.GetProjectBranchDatabaseRequest,
+        config?: AxiosRequestConfig
+    ): Promise<operations.GetProjectBranchDatabaseResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.GetProjectBranchDatabaseRequest(req);
         }
-        break;
-      default:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.generalError = utils.objectToClass(
-            httpRes?.data,
-            shared.GeneralError
-          );
+
+        const baseURL: string = this._serverURL;
+        const url: string = utils.generateURL(
+            baseURL,
+            "/projects/{project_id}/branches/{branch_id}/databases/{database_name}",
+            req
+        );
+
+        const client: AxiosInstance = this._securityClient || this._defaultClient;
+
+        const headers = { ...config?.headers };
+        headers["Accept"] = "application/json;q=1, application/json;q=0";
+        headers[
+            "user-agent"
+        ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
+
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: url,
+            method: "get",
+            headers: headers,
+            ...config,
+        });
+
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
         }
-        break;
-    }
 
-    return res;
-  }
-
-  /**
-   * Get a list of branches
-   *
-   * @remarks
-   * Retrieves a list of branches for the specified project.
-   * You can obtain a `project_id` by listing the projects for your Neon account.
-   *
-   * Each Neon project has a root branch named `main`.
-   * A `branch_id` value has a `br-` prefix.
-   * A project may contain child branches that were branched from `main` or from another branch.
-   * A parent branch is identified by the `parent_id` value, which is the `id` of the parent branch.
-   * For related information, see [Manage branches](https://neon.tech/docs/manage/branches/).
-   *
-   */
-  async listProjectBranches(
-    req: operations.ListProjectBranchesRequest,
-    config?: AxiosRequestConfig
-  ): Promise<operations.ListProjectBranchesResponse> {
-    if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.ListProjectBranchesRequest(req);
-    }
-
-    const baseURL: string = this._serverURL;
-    const url: string = utils.generateURL(
-      baseURL,
-      "/projects/{project_id}/branches",
-      req
-    );
-
-    const client: AxiosInstance = this._securityClient || this._defaultClient;
-
-    const headers = { ...config?.headers };
-    headers["Accept"] = "application/json;q=1, application/json;q=0";
-    headers[
-      "user-agent"
-    ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
-
-    const httpRes: AxiosResponse = await client.request({
-      validateStatus: () => true,
-      url: url,
-      method: "get",
-      headers: headers,
-      ...config,
-    });
-
-    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-    if (httpRes?.status == null) {
-      throw new Error(`status code not found in response: ${httpRes}`);
-    }
-
-    const res: operations.ListProjectBranchesResponse =
-      new operations.ListProjectBranchesResponse({
-        statusCode: httpRes.status,
-        contentType: contentType,
-        rawResponse: httpRes,
-      });
-    switch (true) {
-      case httpRes?.status == 200:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.branchesResponse = utils.objectToClass(
-            httpRes?.data,
-            shared.BranchesResponse
-          );
+        const res: operations.GetProjectBranchDatabaseResponse =
+            new operations.GetProjectBranchDatabaseResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes,
+            });
+        switch (true) {
+            case httpRes?.status == 200:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.databaseResponse = utils.objectToClass(
+                        httpRes?.data,
+                        shared.DatabaseResponse
+                    );
+                }
+                break;
+            default:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.generalError = utils.objectToClass(httpRes?.data, shared.GeneralError);
+                }
+                break;
         }
-        break;
-      default:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.generalError = utils.objectToClass(
-            httpRes?.data,
-            shared.GeneralError
-          );
+
+        return res;
+    }
+
+    /**
+     * Get role details
+     *
+     * @remarks
+     * Retrieves details about the specified role.
+     * You can obtain a `project_id` by listing the projects for your Neon account.
+     * You can obtain the `branch_id` by listing the project's branches.
+     * You can obtain the `role_name` by listing the roles for a branch.
+     * In Neon, the terms "role" and "user" are synonymous.
+     * For related information, see [Managing users](https://neon.tech/docs/manage/users/).
+     *
+     */
+    async getProjectBranchRole(
+        req: operations.GetProjectBranchRoleRequest,
+        config?: AxiosRequestConfig
+    ): Promise<operations.GetProjectBranchRoleResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.GetProjectBranchRoleRequest(req);
         }
-        break;
-    }
 
-    return res;
-  }
+        const baseURL: string = this._serverURL;
+        const url: string = utils.generateURL(
+            baseURL,
+            "/projects/{project_id}/branches/{branch_id}/roles/{role_name}",
+            req
+        );
 
-  /**
-   * Reset the role password
-   *
-   * @remarks
-   * Resets the password for the specified role.
-   * Returns a new password and operations. The new password is ready to use when the last operation finishes.
-   * The old password remains valid until last operation finishes.
-   * Connections to the read-write endpoint are dropped. If idle,
-   * the read-write endpoint becomes active for a short period of time.
-   *
-   * You can obtain a `project_id` by listing the projects for your Neon account.
-   * You can obtain the `branch_id` by listing the project's branches.
-   * You can obtain the `role_name` by listing the roles for a branch.
-   * In Neon, the terms "role" and "user" are synonymous.
-   * For related information, see [Managing users](https://neon.tech/docs/manage/users/).
-   *
-   */
-  async resetProjectBranchRolePassword(
-    req: operations.ResetProjectBranchRolePasswordRequest,
-    config?: AxiosRequestConfig
-  ): Promise<operations.ResetProjectBranchRolePasswordResponse> {
-    if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.ResetProjectBranchRolePasswordRequest(req);
-    }
+        const client: AxiosInstance = this._securityClient || this._defaultClient;
 
-    const baseURL: string = this._serverURL;
-    const url: string = utils.generateURL(
-      baseURL,
-      "/projects/{project_id}/branches/{branch_id}/roles/{role_name}/reset_password",
-      req
-    );
+        const headers = { ...config?.headers };
+        headers["Accept"] = "application/json;q=1, application/json;q=0";
+        headers[
+            "user-agent"
+        ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
 
-    const client: AxiosInstance = this._securityClient || this._defaultClient;
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: url,
+            method: "get",
+            headers: headers,
+            ...config,
+        });
 
-    const headers = { ...config?.headers };
-    headers["Accept"] = "application/json;q=1, application/json;q=0";
-    headers[
-      "user-agent"
-    ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-    const httpRes: AxiosResponse = await client.request({
-      validateStatus: () => true,
-      url: url,
-      method: "post",
-      headers: headers,
-      ...config,
-    });
-
-    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-    if (httpRes?.status == null) {
-      throw new Error(`status code not found in response: ${httpRes}`);
-    }
-
-    const res: operations.ResetProjectBranchRolePasswordResponse =
-      new operations.ResetProjectBranchRolePasswordResponse({
-        statusCode: httpRes.status,
-        contentType: contentType,
-        rawResponse: httpRes,
-      });
-    switch (true) {
-      case httpRes?.status == 200:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.roleOperations = utils.objectToClass(
-            httpRes?.data,
-            shared.RoleOperations
-          );
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
         }
-        break;
-      default:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.generalError = utils.objectToClass(
-            httpRes?.data,
-            shared.GeneralError
-          );
+
+        const res: operations.GetProjectBranchRoleResponse =
+            new operations.GetProjectBranchRoleResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes,
+            });
+        switch (true) {
+            case httpRes?.status == 200:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.roleResponse = utils.objectToClass(httpRes?.data, shared.RoleResponse);
+                }
+                break;
+            default:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.generalError = utils.objectToClass(httpRes?.data, shared.GeneralError);
+                }
+                break;
         }
-        break;
+
+        return res;
     }
 
-    return res;
-  }
-
-  /**
-   * Set the branch as the primary branch of a project
-   *
-   * @remarks
-   * The primary mark is automatically removed from the previous primary branch.
-   * You can obtain a `project_id` by listing the projects for your Neon account.
-   * You can obtain the `branch_id` by listing the project's branches.
-   * For more information, see [Manage branches](https://neon.tech/docs/manage/branches/).
-   *
-   */
-  async setPrimaryProjectBranch(
-    req: operations.SetPrimaryProjectBranchRequest,
-    config?: AxiosRequestConfig
-  ): Promise<operations.SetPrimaryProjectBranchResponse> {
-    if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.SetPrimaryProjectBranchRequest(req);
-    }
-
-    const baseURL: string = this._serverURL;
-    const url: string = utils.generateURL(
-      baseURL,
-      "/projects/{project_id}/branches/{branch_id}/set_as_primary",
-      req
-    );
-
-    const client: AxiosInstance = this._securityClient || this._defaultClient;
-
-    const headers = { ...config?.headers };
-    headers["Accept"] = "application/json;q=1, application/json;q=0";
-    headers[
-      "user-agent"
-    ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
-
-    const httpRes: AxiosResponse = await client.request({
-      validateStatus: () => true,
-      url: url,
-      method: "post",
-      headers: headers,
-      ...config,
-    });
-
-    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-    if (httpRes?.status == null) {
-      throw new Error(`status code not found in response: ${httpRes}`);
-    }
-
-    const res: operations.SetPrimaryProjectBranchResponse =
-      new operations.SetPrimaryProjectBranchResponse({
-        statusCode: httpRes.status,
-        contentType: contentType,
-        rawResponse: httpRes,
-      });
-    switch (true) {
-      case httpRes?.status == 200:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.branchOperations = utils.objectToClass(
-            httpRes?.data,
-            shared.BranchOperations
-          );
+    /**
+     * Get role password
+     *
+     * @remarks
+     * Retrieves password of the specified role if possible.
+     * You can obtain a `project_id` by listing the projects for your Neon account.
+     * You can obtain the `branch_id` by listing the project's branches.
+     * You can obtain the `role_name` by listing the roles for a branch.
+     * In Neon, the terms "role" and "user" are synonymous.
+     * For related information, see [Managing users](https://neon.tech/docs/manage/users/).
+     *
+     */
+    async getProjectBranchRolePassword(
+        req: operations.GetProjectBranchRolePasswordRequest,
+        config?: AxiosRequestConfig
+    ): Promise<operations.GetProjectBranchRolePasswordResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.GetProjectBranchRolePasswordRequest(req);
         }
-        break;
-      default:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.generalError = utils.objectToClass(
-            httpRes?.data,
-            shared.GeneralError
-          );
+
+        const baseURL: string = this._serverURL;
+        const url: string = utils.generateURL(
+            baseURL,
+            "/projects/{project_id}/branches/{branch_id}/roles/{role_name}/reveal_password",
+            req
+        );
+
+        const client: AxiosInstance = this._securityClient || this._defaultClient;
+
+        const headers = { ...config?.headers };
+        headers["Accept"] = "application/json;q=1, application/json;q=0";
+        headers[
+            "user-agent"
+        ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
+
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: url,
+            method: "get",
+            headers: headers,
+            ...config,
+        });
+
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
         }
-        break;
-    }
 
-    return res;
-  }
-
-  /**
-   * Update a branch
-   *
-   * @remarks
-   * Updates the specified branch. Only changing the branch name is supported.
-   * You can obtain a `project_id` by listing the projects for your Neon account.
-   * You can obtain the `branch_id` by listing the project's branches.
-   * For more information, see [Manage branches](https://neon.tech/docs/manage/branches/).
-   *
-   */
-  async updateProjectBranch(
-    req: operations.UpdateProjectBranchRequest,
-    config?: AxiosRequestConfig
-  ): Promise<operations.UpdateProjectBranchResponse> {
-    if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.UpdateProjectBranchRequest(req);
-    }
-
-    const baseURL: string = this._serverURL;
-    const url: string = utils.generateURL(
-      baseURL,
-      "/projects/{project_id}/branches/{branch_id}",
-      req
-    );
-
-    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
-
-    try {
-      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
-        req,
-        "branchUpdateRequest",
-        "json"
-      );
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        throw new Error(`Error serializing request body, cause: ${e.message}`);
-      }
-    }
-
-    const client: AxiosInstance = this._securityClient || this._defaultClient;
-
-    const headers = { ...reqBodyHeaders, ...config?.headers };
-    if (reqBody == null || Object.keys(reqBody).length === 0)
-      throw new Error("request body is required");
-    headers["Accept"] = "application/json;q=1, application/json;q=0";
-    headers[
-      "user-agent"
-    ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
-
-    const httpRes: AxiosResponse = await client.request({
-      validateStatus: () => true,
-      url: url,
-      method: "patch",
-      headers: headers,
-      data: reqBody,
-      ...config,
-    });
-
-    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-    if (httpRes?.status == null) {
-      throw new Error(`status code not found in response: ${httpRes}`);
-    }
-
-    const res: operations.UpdateProjectBranchResponse =
-      new operations.UpdateProjectBranchResponse({
-        statusCode: httpRes.status,
-        contentType: contentType,
-        rawResponse: httpRes,
-      });
-    switch (true) {
-      case httpRes?.status == 200:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.branchOperations = utils.objectToClass(
-            httpRes?.data,
-            shared.BranchOperations
-          );
+        const res: operations.GetProjectBranchRolePasswordResponse =
+            new operations.GetProjectBranchRolePasswordResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes,
+            });
+        switch (true) {
+            case httpRes?.status == 200:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.rolePasswordResponse = utils.objectToClass(
+                        httpRes?.data,
+                        shared.RolePasswordResponse
+                    );
+                }
+                break;
+            default:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.generalError = utils.objectToClass(httpRes?.data, shared.GeneralError);
+                }
+                break;
         }
-        break;
-      default:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.generalError = utils.objectToClass(
-            httpRes?.data,
-            shared.GeneralError
-          );
+
+        return res;
+    }
+
+    /**
+     * Get a list of databases
+     *
+     * @remarks
+     * Retrieves a list of databases for the specified branch.
+     * A branch can have multiple databases.
+     * You can obtain a `project_id` by listing the projects for your Neon account.
+     * You can obtain the `branch_id` by listing the project's branches.
+     * For related information, see [Manage databases](https://neon.tech/docs/manage/databases/).
+     *
+     */
+    async listProjectBranchDatabases(
+        req: operations.ListProjectBranchDatabasesRequest,
+        config?: AxiosRequestConfig
+    ): Promise<operations.ListProjectBranchDatabasesResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.ListProjectBranchDatabasesRequest(req);
         }
-        break;
-    }
 
-    return res;
-  }
+        const baseURL: string = this._serverURL;
+        const url: string = utils.generateURL(
+            baseURL,
+            "/projects/{project_id}/branches/{branch_id}/databases",
+            req
+        );
 
-  /**
-   * Update a database
-   *
-   * @remarks
-   * Updates the specified database in the branch.
-   * You can obtain a `project_id` by listing the projects for your Neon account.
-   * You can obtain the `branch_id` and `database_name` by listing the branch's databases.
-   * For related information, see [Manage databases](https://neon.tech/docs/manage/databases/).
-   *
-   */
-  async updateProjectBranchDatabase(
-    req: operations.UpdateProjectBranchDatabaseRequest,
-    config?: AxiosRequestConfig
-  ): Promise<operations.UpdateProjectBranchDatabaseResponse> {
-    if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.UpdateProjectBranchDatabaseRequest(req);
-    }
+        const client: AxiosInstance = this._securityClient || this._defaultClient;
 
-    const baseURL: string = this._serverURL;
-    const url: string = utils.generateURL(
-      baseURL,
-      "/projects/{project_id}/branches/{branch_id}/databases/{database_name}",
-      req
-    );
+        const headers = { ...config?.headers };
+        headers["Accept"] = "application/json;q=1, application/json;q=0";
+        headers[
+            "user-agent"
+        ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
 
-    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: url,
+            method: "get",
+            headers: headers,
+            ...config,
+        });
 
-    try {
-      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
-        req,
-        "databaseUpdateRequest",
-        "json"
-      );
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        throw new Error(`Error serializing request body, cause: ${e.message}`);
-      }
-    }
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-    const client: AxiosInstance = this._securityClient || this._defaultClient;
-
-    const headers = { ...reqBodyHeaders, ...config?.headers };
-    if (reqBody == null || Object.keys(reqBody).length === 0)
-      throw new Error("request body is required");
-    headers["Accept"] = "application/json;q=1, application/json;q=0";
-    headers[
-      "user-agent"
-    ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
-
-    const httpRes: AxiosResponse = await client.request({
-      validateStatus: () => true,
-      url: url,
-      method: "patch",
-      headers: headers,
-      data: reqBody,
-      ...config,
-    });
-
-    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-    if (httpRes?.status == null) {
-      throw new Error(`status code not found in response: ${httpRes}`);
-    }
-
-    const res: operations.UpdateProjectBranchDatabaseResponse =
-      new operations.UpdateProjectBranchDatabaseResponse({
-        statusCode: httpRes.status,
-        contentType: contentType,
-        rawResponse: httpRes,
-      });
-    switch (true) {
-      case httpRes?.status == 200:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.databaseOperations = utils.objectToClass(
-            httpRes?.data,
-            shared.DatabaseOperations
-          );
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
         }
-        break;
-      default:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.generalError = utils.objectToClass(
-            httpRes?.data,
-            shared.GeneralError
-          );
+
+        const res: operations.ListProjectBranchDatabasesResponse =
+            new operations.ListProjectBranchDatabasesResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes,
+            });
+        switch (true) {
+            case httpRes?.status == 200:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.databasesResponse = utils.objectToClass(
+                        httpRes?.data,
+                        shared.DatabasesResponse
+                    );
+                }
+                break;
+            default:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.generalError = utils.objectToClass(httpRes?.data, shared.GeneralError);
+                }
+                break;
         }
-        break;
+
+        return res;
     }
 
-    return res;
-  }
+    /**
+     * Get a list of branch endpoints
+     *
+     * @remarks
+     * Retrieves a list of endpoints for the specified branch.
+     * Currently, Neon permits only one endpoint per branch.
+     * You can obtain a `project_id` by listing the projects for your Neon account.
+     * You can obtain the `branch_id` by listing the project's branches.
+     *
+     */
+    async listProjectBranchEndpoints(
+        req: operations.ListProjectBranchEndpointsRequest,
+        config?: AxiosRequestConfig
+    ): Promise<operations.ListProjectBranchEndpointsResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.ListProjectBranchEndpointsRequest(req);
+        }
+
+        const baseURL: string = this._serverURL;
+        const url: string = utils.generateURL(
+            baseURL,
+            "/projects/{project_id}/branches/{branch_id}/endpoints",
+            req
+        );
+
+        const client: AxiosInstance = this._securityClient || this._defaultClient;
+
+        const headers = { ...config?.headers };
+        headers["Accept"] = "application/json;q=1, application/json;q=0";
+        headers[
+            "user-agent"
+        ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
+
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: url,
+            method: "get",
+            headers: headers,
+            ...config,
+        });
+
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
+        }
+
+        const res: operations.ListProjectBranchEndpointsResponse =
+            new operations.ListProjectBranchEndpointsResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes,
+            });
+        switch (true) {
+            case httpRes?.status == 200:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.endpointsResponse = utils.objectToClass(
+                        httpRes?.data,
+                        shared.EndpointsResponse
+                    );
+                }
+                break;
+            default:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.generalError = utils.objectToClass(httpRes?.data, shared.GeneralError);
+                }
+                break;
+        }
+
+        return res;
+    }
+
+    /**
+     * Get a list of roles
+     *
+     * @remarks
+     * Retrieves a list of roles from the specified branch.
+     * You can obtain a `project_id` by listing the projects for your Neon account.
+     * You can obtain the `branch_id` by listing the project's branches.
+     * In Neon, the terms "role" and "user" are synonymous.
+     * For related information, see [Manage users](https://neon.tech/docs/manage/users/).
+     *
+     */
+    async listProjectBranchRoles(
+        req: operations.ListProjectBranchRolesRequest,
+        config?: AxiosRequestConfig
+    ): Promise<operations.ListProjectBranchRolesResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.ListProjectBranchRolesRequest(req);
+        }
+
+        const baseURL: string = this._serverURL;
+        const url: string = utils.generateURL(
+            baseURL,
+            "/projects/{project_id}/branches/{branch_id}/roles",
+            req
+        );
+
+        const client: AxiosInstance = this._securityClient || this._defaultClient;
+
+        const headers = { ...config?.headers };
+        headers["Accept"] = "application/json;q=1, application/json;q=0";
+        headers[
+            "user-agent"
+        ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
+
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: url,
+            method: "get",
+            headers: headers,
+            ...config,
+        });
+
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
+        }
+
+        const res: operations.ListProjectBranchRolesResponse =
+            new operations.ListProjectBranchRolesResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes,
+            });
+        switch (true) {
+            case httpRes?.status == 200:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.rolesResponse = utils.objectToClass(httpRes?.data, shared.RolesResponse);
+                }
+                break;
+            default:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.generalError = utils.objectToClass(httpRes?.data, shared.GeneralError);
+                }
+                break;
+        }
+
+        return res;
+    }
+
+    /**
+     * Get a list of branches
+     *
+     * @remarks
+     * Retrieves a list of branches for the specified project.
+     * You can obtain a `project_id` by listing the projects for your Neon account.
+     *
+     * Each Neon project has a root branch named `main`.
+     * A `branch_id` value has a `br-` prefix.
+     * A project may contain child branches that were branched from `main` or from another branch.
+     * A parent branch is identified by the `parent_id` value, which is the `id` of the parent branch.
+     * For related information, see [Manage branches](https://neon.tech/docs/manage/branches/).
+     *
+     */
+    async listProjectBranches(
+        req: operations.ListProjectBranchesRequest,
+        config?: AxiosRequestConfig
+    ): Promise<operations.ListProjectBranchesResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.ListProjectBranchesRequest(req);
+        }
+
+        const baseURL: string = this._serverURL;
+        const url: string = utils.generateURL(baseURL, "/projects/{project_id}/branches", req);
+
+        const client: AxiosInstance = this._securityClient || this._defaultClient;
+
+        const headers = { ...config?.headers };
+        headers["Accept"] = "application/json;q=1, application/json;q=0";
+        headers[
+            "user-agent"
+        ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
+
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: url,
+            method: "get",
+            headers: headers,
+            ...config,
+        });
+
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
+        }
+
+        const res: operations.ListProjectBranchesResponse =
+            new operations.ListProjectBranchesResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes,
+            });
+        switch (true) {
+            case httpRes?.status == 200:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.branchesResponse = utils.objectToClass(
+                        httpRes?.data,
+                        shared.BranchesResponse
+                    );
+                }
+                break;
+            default:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.generalError = utils.objectToClass(httpRes?.data, shared.GeneralError);
+                }
+                break;
+        }
+
+        return res;
+    }
+
+    /**
+     * Reset the role password
+     *
+     * @remarks
+     * Resets the password for the specified role.
+     * Returns a new password and operations. The new password is ready to use when the last operation finishes.
+     * The old password remains valid until last operation finishes.
+     * Connections to the read-write endpoint are dropped. If idle,
+     * the read-write endpoint becomes active for a short period of time.
+     *
+     * You can obtain a `project_id` by listing the projects for your Neon account.
+     * You can obtain the `branch_id` by listing the project's branches.
+     * You can obtain the `role_name` by listing the roles for a branch.
+     * In Neon, the terms "role" and "user" are synonymous.
+     * For related information, see [Managing users](https://neon.tech/docs/manage/users/).
+     *
+     */
+    async resetProjectBranchRolePassword(
+        req: operations.ResetProjectBranchRolePasswordRequest,
+        config?: AxiosRequestConfig
+    ): Promise<operations.ResetProjectBranchRolePasswordResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.ResetProjectBranchRolePasswordRequest(req);
+        }
+
+        const baseURL: string = this._serverURL;
+        const url: string = utils.generateURL(
+            baseURL,
+            "/projects/{project_id}/branches/{branch_id}/roles/{role_name}/reset_password",
+            req
+        );
+
+        const client: AxiosInstance = this._securityClient || this._defaultClient;
+
+        const headers = { ...config?.headers };
+        headers["Accept"] = "application/json;q=1, application/json;q=0";
+        headers[
+            "user-agent"
+        ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
+
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: url,
+            method: "post",
+            headers: headers,
+            ...config,
+        });
+
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
+        }
+
+        const res: operations.ResetProjectBranchRolePasswordResponse =
+            new operations.ResetProjectBranchRolePasswordResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes,
+            });
+        switch (true) {
+            case httpRes?.status == 200:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.roleOperations = utils.objectToClass(httpRes?.data, shared.RoleOperations);
+                }
+                break;
+            default:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.generalError = utils.objectToClass(httpRes?.data, shared.GeneralError);
+                }
+                break;
+        }
+
+        return res;
+    }
+
+    /**
+     * Set the branch as the primary branch of a project
+     *
+     * @remarks
+     * The primary mark is automatically removed from the previous primary branch.
+     * You can obtain a `project_id` by listing the projects for your Neon account.
+     * You can obtain the `branch_id` by listing the project's branches.
+     * For more information, see [Manage branches](https://neon.tech/docs/manage/branches/).
+     *
+     */
+    async setPrimaryProjectBranch(
+        req: operations.SetPrimaryProjectBranchRequest,
+        config?: AxiosRequestConfig
+    ): Promise<operations.SetPrimaryProjectBranchResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.SetPrimaryProjectBranchRequest(req);
+        }
+
+        const baseURL: string = this._serverURL;
+        const url: string = utils.generateURL(
+            baseURL,
+            "/projects/{project_id}/branches/{branch_id}/set_as_primary",
+            req
+        );
+
+        const client: AxiosInstance = this._securityClient || this._defaultClient;
+
+        const headers = { ...config?.headers };
+        headers["Accept"] = "application/json;q=1, application/json;q=0";
+        headers[
+            "user-agent"
+        ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
+
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: url,
+            method: "post",
+            headers: headers,
+            ...config,
+        });
+
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
+        }
+
+        const res: operations.SetPrimaryProjectBranchResponse =
+            new operations.SetPrimaryProjectBranchResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes,
+            });
+        switch (true) {
+            case httpRes?.status == 200:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.branchOperations = utils.objectToClass(
+                        httpRes?.data,
+                        shared.BranchOperations
+                    );
+                }
+                break;
+            default:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.generalError = utils.objectToClass(httpRes?.data, shared.GeneralError);
+                }
+                break;
+        }
+
+        return res;
+    }
+
+    /**
+     * Update a branch
+     *
+     * @remarks
+     * Updates the specified branch. Only changing the branch name is supported.
+     * You can obtain a `project_id` by listing the projects for your Neon account.
+     * You can obtain the `branch_id` by listing the project's branches.
+     * For more information, see [Manage branches](https://neon.tech/docs/manage/branches/).
+     *
+     */
+    async updateProjectBranch(
+        req: operations.UpdateProjectBranchRequest,
+        config?: AxiosRequestConfig
+    ): Promise<operations.UpdateProjectBranchResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.UpdateProjectBranchRequest(req);
+        }
+
+        const baseURL: string = this._serverURL;
+        const url: string = utils.generateURL(
+            baseURL,
+            "/projects/{project_id}/branches/{branch_id}",
+            req
+        );
+
+        let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+        try {
+            [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
+                req,
+                "branchUpdateRequest",
+                "json"
+            );
+        } catch (e: unknown) {
+            if (e instanceof Error) {
+                throw new Error(`Error serializing request body, cause: ${e.message}`);
+            }
+        }
+
+        const client: AxiosInstance = this._securityClient || this._defaultClient;
+
+        const headers = { ...reqBodyHeaders, ...config?.headers };
+        if (reqBody == null || Object.keys(reqBody).length === 0)
+            throw new Error("request body is required");
+        headers["Accept"] = "application/json;q=1, application/json;q=0";
+        headers[
+            "user-agent"
+        ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
+
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: url,
+            method: "patch",
+            headers: headers,
+            data: reqBody,
+            ...config,
+        });
+
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
+        }
+
+        const res: operations.UpdateProjectBranchResponse =
+            new operations.UpdateProjectBranchResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes,
+            });
+        switch (true) {
+            case httpRes?.status == 200:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.branchOperations = utils.objectToClass(
+                        httpRes?.data,
+                        shared.BranchOperations
+                    );
+                }
+                break;
+            default:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.generalError = utils.objectToClass(httpRes?.data, shared.GeneralError);
+                }
+                break;
+        }
+
+        return res;
+    }
+
+    /**
+     * Update a database
+     *
+     * @remarks
+     * Updates the specified database in the branch.
+     * You can obtain a `project_id` by listing the projects for your Neon account.
+     * You can obtain the `branch_id` and `database_name` by listing the branch's databases.
+     * For related information, see [Manage databases](https://neon.tech/docs/manage/databases/).
+     *
+     */
+    async updateProjectBranchDatabase(
+        req: operations.UpdateProjectBranchDatabaseRequest,
+        config?: AxiosRequestConfig
+    ): Promise<operations.UpdateProjectBranchDatabaseResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.UpdateProjectBranchDatabaseRequest(req);
+        }
+
+        const baseURL: string = this._serverURL;
+        const url: string = utils.generateURL(
+            baseURL,
+            "/projects/{project_id}/branches/{branch_id}/databases/{database_name}",
+            req
+        );
+
+        let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+        try {
+            [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
+                req,
+                "databaseUpdateRequest",
+                "json"
+            );
+        } catch (e: unknown) {
+            if (e instanceof Error) {
+                throw new Error(`Error serializing request body, cause: ${e.message}`);
+            }
+        }
+
+        const client: AxiosInstance = this._securityClient || this._defaultClient;
+
+        const headers = { ...reqBodyHeaders, ...config?.headers };
+        if (reqBody == null || Object.keys(reqBody).length === 0)
+            throw new Error("request body is required");
+        headers["Accept"] = "application/json;q=1, application/json;q=0";
+        headers[
+            "user-agent"
+        ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
+
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: url,
+            method: "patch",
+            headers: headers,
+            data: reqBody,
+            ...config,
+        });
+
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
+        }
+
+        const res: operations.UpdateProjectBranchDatabaseResponse =
+            new operations.UpdateProjectBranchDatabaseResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes,
+            });
+        switch (true) {
+            case httpRes?.status == 200:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.databaseOperations = utils.objectToClass(
+                        httpRes?.data,
+                        shared.DatabaseOperations
+                    );
+                }
+                break;
+            default:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.generalError = utils.objectToClass(httpRes?.data, shared.GeneralError);
+                }
+                break;
+        }
+
+        return res;
+    }
 }

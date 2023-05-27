@@ -9,5 +9,5 @@
  *
  */
 export enum EndpointPoolerMode {
-  Transaction = "transaction",
+    Transaction = "transaction",
 }

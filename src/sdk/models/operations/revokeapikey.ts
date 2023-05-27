@@ -7,34 +7,32 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 
 export class RevokeApiKeyRequest extends SpeakeasyBase {
-  /**
-   * The API key ID
-   */
-  @SpeakeasyMetadata({
-    data: "pathParam, style=simple;explode=false;name=key_id",
-  })
-  keyId: number;
+    /**
+     * The API key ID
+     */
+    @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=key_id" })
+    keyId: number;
 }
 
 export class RevokeApiKeyResponse extends SpeakeasyBase {
-  /**
-   * Revoked the specified API key
-   */
-  @SpeakeasyMetadata()
-  apiKeyRevokeResponse?: shared.ApiKeyRevokeResponse;
+    /**
+     * Revoked the specified API key
+     */
+    @SpeakeasyMetadata()
+    apiKeyRevokeResponse?: shared.ApiKeyRevokeResponse;
 
-  @SpeakeasyMetadata()
-  contentType: string;
+    @SpeakeasyMetadata()
+    contentType: string;
 
-  /**
-   * General Error
-   */
-  @SpeakeasyMetadata()
-  generalError?: shared.GeneralError;
+    /**
+     * General Error
+     */
+    @SpeakeasyMetadata()
+    generalError?: shared.GeneralError;
 
-  @SpeakeasyMetadata()
-  statusCode: number;
+    @SpeakeasyMetadata()
+    statusCode: number;
 
-  @SpeakeasyMetadata()
-  rawResponse?: AxiosResponse;
+    @SpeakeasyMetadata()
+    rawResponse?: AxiosResponse;
 }

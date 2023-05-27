@@ -14,7 +14,7 @@ import { Expose } from "class-transformer";
  *
  */
 export class Pagination extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  @Expose({ name: "cursor" })
-  cursor: string;
+    @SpeakeasyMetadata()
+    @Expose({ name: "cursor" })
+    cursor: string;
 }

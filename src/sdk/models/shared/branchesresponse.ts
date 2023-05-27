@@ -10,8 +10,8 @@ import { Expose, Type } from "class-transformer";
  * Returned a list of branches for the specified project
  */
 export class BranchesResponse extends SpeakeasyBase {
-  @SpeakeasyMetadata({ elemType: Branch })
-  @Expose({ name: "branches" })
-  @Type(() => Branch)
-  branches: Branch[];
+    @SpeakeasyMetadata({ elemType: Branch })
+    @Expose({ name: "branches" })
+    @Type(() => Branch)
+    branches: Branch[];
 }

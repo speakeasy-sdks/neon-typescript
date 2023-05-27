@@ -6,53 +6,53 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
 export class ConnectionParameters extends SpeakeasyBase {
-  /**
-   * Database name.
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "database" })
-  database: string;
+    /**
+     * Database name.
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "database" })
+    database: string;
 
-  /**
-   * Host name.
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "host" })
-  host: string;
+    /**
+     * Host name.
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "host" })
+    host: string;
 
-  /**
-   * Password for the role.
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "password" })
-  password: string;
+    /**
+     * Password for the role.
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "password" })
+    password: string;
 
-  /**
-   * Pooler host name.
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "pooler_host" })
-  poolerHost: string;
+    /**
+     * Pooler host name.
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "pooler_host" })
+    poolerHost: string;
 
-  /**
-   * Role name.
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "role" })
-  role: string;
+    /**
+     * Role name.
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "role" })
+    role: string;
 }

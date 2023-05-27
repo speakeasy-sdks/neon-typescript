@@ -8,62 +8,60 @@ import { AxiosResponse } from "axios";
 import { Expose, Type } from "class-transformer";
 
 export class CreateProjectBranchRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
-  branchCreateRequest?: shared.BranchCreateRequest;
+    @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+    branchCreateRequest?: shared.BranchCreateRequest;
 
-  /**
-   * The Neon project ID
-   */
-  @SpeakeasyMetadata({
-    data: "pathParam, style=simple;explode=false;name=project_id",
-  })
-  projectId: string;
+    /**
+     * The Neon project ID
+     */
+    @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project_id" })
+    projectId: string;
 }
 
 /**
  * Created a branch. An endpoint is only created if it was specified in the request.
  */
 export class CreateProjectBranch201ApplicationJSON extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  @Expose({ name: "branch" })
-  @Type(() => shared.Branch)
-  branch: shared.Branch;
+    @SpeakeasyMetadata()
+    @Expose({ name: "branch" })
+    @Type(() => shared.Branch)
+    branch: shared.Branch;
 
-  @SpeakeasyMetadata({ elemType: shared.ConnectionDetails })
-  @Expose({ name: "connection_uris" })
-  @Type(() => shared.ConnectionDetails)
-  connectionUris?: shared.ConnectionDetails[];
+    @SpeakeasyMetadata({ elemType: shared.ConnectionDetails })
+    @Expose({ name: "connection_uris" })
+    @Type(() => shared.ConnectionDetails)
+    connectionUris?: shared.ConnectionDetails[];
 
-  @SpeakeasyMetadata({ elemType: shared.Endpoint })
-  @Expose({ name: "endpoints" })
-  @Type(() => shared.Endpoint)
-  endpoints: shared.Endpoint[];
+    @SpeakeasyMetadata({ elemType: shared.Endpoint })
+    @Expose({ name: "endpoints" })
+    @Type(() => shared.Endpoint)
+    endpoints: shared.Endpoint[];
 
-  @SpeakeasyMetadata({ elemType: shared.Operation })
-  @Expose({ name: "operations" })
-  @Type(() => shared.Operation)
-  operations: shared.Operation[];
+    @SpeakeasyMetadata({ elemType: shared.Operation })
+    @Expose({ name: "operations" })
+    @Type(() => shared.Operation)
+    operations: shared.Operation[];
 }
 
 export class CreateProjectBranchResponse extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  contentType: string;
+    @SpeakeasyMetadata()
+    contentType: string;
 
-  /**
-   * General Error
-   */
-  @SpeakeasyMetadata()
-  generalError?: shared.GeneralError;
+    /**
+     * General Error
+     */
+    @SpeakeasyMetadata()
+    generalError?: shared.GeneralError;
 
-  @SpeakeasyMetadata()
-  statusCode: number;
+    @SpeakeasyMetadata()
+    statusCode: number;
 
-  @SpeakeasyMetadata()
-  rawResponse?: AxiosResponse;
+    @SpeakeasyMetadata()
+    rawResponse?: AxiosResponse;
 
-  /**
-   * Created a branch. An endpoint is only created if it was specified in the request.
-   */
-  @SpeakeasyMetadata()
-  createProjectBranch201ApplicationJSONObject?: CreateProjectBranch201ApplicationJSON;
+    /**
+     * Created a branch. An endpoint is only created if it was specified in the request.
+     */
+    @SpeakeasyMetadata()
+    createProjectBranch201ApplicationJSONObject?: CreateProjectBranch201ApplicationJSON;
 }

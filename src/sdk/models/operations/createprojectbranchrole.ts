@@ -7,45 +7,41 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 
 export class CreateProjectBranchRoleRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
-  roleCreateRequest: shared.RoleCreateRequest;
+    @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+    roleCreateRequest: shared.RoleCreateRequest;
 
-  /**
-   * The branch ID
-   */
-  @SpeakeasyMetadata({
-    data: "pathParam, style=simple;explode=false;name=branch_id",
-  })
-  branchId: string;
+    /**
+     * The branch ID
+     */
+    @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=branch_id" })
+    branchId: string;
 
-  /**
-   * The Neon project ID
-   */
-  @SpeakeasyMetadata({
-    data: "pathParam, style=simple;explode=false;name=project_id",
-  })
-  projectId: string;
+    /**
+     * The Neon project ID
+     */
+    @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project_id" })
+    projectId: string;
 }
 
 export class CreateProjectBranchRoleResponse extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  contentType: string;
+    @SpeakeasyMetadata()
+    contentType: string;
 
-  /**
-   * General Error
-   */
-  @SpeakeasyMetadata()
-  generalError?: shared.GeneralError;
+    /**
+     * General Error
+     */
+    @SpeakeasyMetadata()
+    generalError?: shared.GeneralError;
 
-  /**
-   * Created a role in the specified branch
-   */
-  @SpeakeasyMetadata()
-  roleOperations?: shared.RoleOperations;
+    /**
+     * Created a role in the specified branch
+     */
+    @SpeakeasyMetadata()
+    roleOperations?: shared.RoleOperations;
 
-  @SpeakeasyMetadata()
-  statusCode: number;
+    @SpeakeasyMetadata()
+    statusCode: number;
 
-  @SpeakeasyMetadata()
-  rawResponse?: AxiosResponse;
+    @SpeakeasyMetadata()
+    rawResponse?: AxiosResponse;
 }

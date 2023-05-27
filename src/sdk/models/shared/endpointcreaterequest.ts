@@ -10,119 +10,119 @@ import { Provisioner } from "./provisioner";
 import { Expose, Type } from "class-transformer";
 
 export class EndpointCreateRequestEndpoint extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  @Expose({ name: "autoscaling_limit_max_cu" })
-  autoscalingLimitMaxCu?: number;
+    @SpeakeasyMetadata()
+    @Expose({ name: "autoscaling_limit_max_cu" })
+    autoscalingLimitMaxCu?: number;
 
-  @SpeakeasyMetadata()
-  @Expose({ name: "autoscaling_limit_min_cu" })
-  autoscalingLimitMinCu?: number;
+    @SpeakeasyMetadata()
+    @Expose({ name: "autoscaling_limit_min_cu" })
+    autoscalingLimitMinCu?: number;
 
-  /**
-   * The ID of the branch the compute endpoint will be associated with
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "branch_id" })
-  branchId: string;
+    /**
+     * The ID of the branch the compute endpoint will be associated with
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "branch_id" })
+    branchId: string;
 
-  /**
-   * Whether to restrict connections to the compute endpoint
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "disabled" })
-  disabled?: boolean;
+    /**
+     * Whether to restrict connections to the compute endpoint
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "disabled" })
+    disabled?: boolean;
 
-  /**
-   * NOT YET IMPLEMENTED. Whether to permit passwordless access to the compute endpoint.
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "passwordless_access" })
-  passwordlessAccess?: boolean;
+    /**
+     * NOT YET IMPLEMENTED. Whether to permit passwordless access to the compute endpoint.
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "passwordless_access" })
+    passwordlessAccess?: boolean;
 
-  /**
-   * Whether to enable connection pooling for the compute endpoint
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "pooler_enabled" })
-  poolerEnabled?: boolean;
+    /**
+     * Whether to enable connection pooling for the compute endpoint
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "pooler_enabled" })
+    poolerEnabled?: boolean;
 
-  /**
-   * The connection pooler mode. Neon supports PgBouncer in `transaction` mode only.
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "pooler_mode" })
-  poolerMode?: EndpointPoolerMode;
+    /**
+     * The connection pooler mode. Neon supports PgBouncer in `transaction` mode only.
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "pooler_mode" })
+    poolerMode?: EndpointPoolerMode;
 
-  /**
-   * The Neon compute provisioner.
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "provisioner" })
-  provisioner?: Provisioner;
+    /**
+     * The Neon compute provisioner.
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "provisioner" })
+    provisioner?: Provisioner;
 
-  /**
-   * The region where the compute endpoint will be created. Only the project's `region_id` is permitted.
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "region_id" })
-  regionId?: string;
+    /**
+     * The region where the compute endpoint will be created. Only the project's `region_id` is permitted.
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "region_id" })
+    regionId?: string;
 
-  /**
-   * A collection of settings for a compute endpoint
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "settings" })
-  @Type(() => EndpointSettingsData)
-  settings?: EndpointSettingsData;
+    /**
+     * A collection of settings for a compute endpoint
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "settings" })
+    @Type(() => EndpointSettingsData)
+    settings?: EndpointSettingsData;
 
-  /**
-   * Duration of inactivity in seconds after which endpoint will be
-   *
-   * @remarks
-   * automatically suspended. Value `0` means use global default,
-   * `-1` means never suspend. Maximum value is 1 week in seconds.
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "suspend_timeout_seconds" })
-  suspendTimeoutSeconds?: number;
+    /**
+     * Duration of inactivity in seconds after which endpoint will be
+     *
+     * @remarks
+     * automatically suspended. Value `0` means use global default,
+     * `-1` means never suspend. Maximum value is 1 week in seconds.
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "suspend_timeout_seconds" })
+    suspendTimeoutSeconds?: number;
 
-  /**
-   * The compute endpoint type. Either `read_write` or `read_only`.
-   *
-   * @remarks
-   * The `read_only` compute endpoint type is not yet supported.
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "type" })
-  type: EndpointType;
+    /**
+     * The compute endpoint type. Either `read_write` or `read_only`.
+     *
+     * @remarks
+     * The `read_only` compute endpoint type is not yet supported.
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "type" })
+    type: EndpointType;
 }
 
 export class EndpointCreateRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  @Expose({ name: "endpoint" })
-  @Type(() => EndpointCreateRequestEndpoint)
-  endpoint: EndpointCreateRequestEndpoint;
+    @SpeakeasyMetadata()
+    @Expose({ name: "endpoint" })
+    @Type(() => EndpointCreateRequestEndpoint)
+    endpoint: EndpointCreateRequestEndpoint;
 }

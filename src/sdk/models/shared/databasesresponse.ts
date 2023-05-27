@@ -10,8 +10,8 @@ import { Expose, Type } from "class-transformer";
  * Returned a list of databases of the specified branch
  */
 export class DatabasesResponse extends SpeakeasyBase {
-  @SpeakeasyMetadata({ elemType: Database })
-  @Expose({ name: "databases" })
-  @Type(() => Database)
-  databases: Database[];
+    @SpeakeasyMetadata({ elemType: Database })
+    @Expose({ name: "databases" })
+    @Type(() => Database)
+    databases: Database[];
 }

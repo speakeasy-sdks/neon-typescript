@@ -7,53 +7,47 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 
 export class UpdateProjectBranchDatabaseRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
-  databaseUpdateRequest: shared.DatabaseUpdateRequest;
+    @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+    databaseUpdateRequest: shared.DatabaseUpdateRequest;
 
-  /**
-   * The branch ID
-   */
-  @SpeakeasyMetadata({
-    data: "pathParam, style=simple;explode=false;name=branch_id",
-  })
-  branchId: string;
+    /**
+     * The branch ID
+     */
+    @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=branch_id" })
+    branchId: string;
 
-  /**
-   * The database name
-   */
-  @SpeakeasyMetadata({
-    data: "pathParam, style=simple;explode=false;name=database_name",
-  })
-  databaseName: string;
+    /**
+     * The database name
+     */
+    @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=database_name" })
+    databaseName: string;
 
-  /**
-   * The Neon project ID
-   */
-  @SpeakeasyMetadata({
-    data: "pathParam, style=simple;explode=false;name=project_id",
-  })
-  projectId: string;
+    /**
+     * The Neon project ID
+     */
+    @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project_id" })
+    projectId: string;
 }
 
 export class UpdateProjectBranchDatabaseResponse extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  contentType: string;
+    @SpeakeasyMetadata()
+    contentType: string;
 
-  /**
-   * Updated the database
-   */
-  @SpeakeasyMetadata()
-  databaseOperations?: shared.DatabaseOperations;
+    /**
+     * Updated the database
+     */
+    @SpeakeasyMetadata()
+    databaseOperations?: shared.DatabaseOperations;
 
-  /**
-   * General Error
-   */
-  @SpeakeasyMetadata()
-  generalError?: shared.GeneralError;
+    /**
+     * General Error
+     */
+    @SpeakeasyMetadata()
+    generalError?: shared.GeneralError;
 
-  @SpeakeasyMetadata()
-  statusCode: number;
+    @SpeakeasyMetadata()
+    statusCode: number;
 
-  @SpeakeasyMetadata()
-  rawResponse?: AxiosResponse;
+    @SpeakeasyMetadata()
+    rawResponse?: AxiosResponse;
 }

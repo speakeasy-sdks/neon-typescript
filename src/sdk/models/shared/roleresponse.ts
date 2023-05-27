@@ -10,8 +10,8 @@ import { Expose, Type } from "class-transformer";
  * Successfully returned details for the specified role
  */
 export class RoleResponse extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  @Expose({ name: "role" })
-  @Type(() => Role)
-  role: Role;
+    @SpeakeasyMetadata()
+    @Expose({ name: "role" })
+    @Type(() => Role)
+    role: Role;
 }

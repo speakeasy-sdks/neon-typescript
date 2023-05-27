@@ -9,14 +9,14 @@ import { Expose } from "class-transformer";
  * General Error
  */
 export class GeneralError extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  @Expose({ name: "code" })
-  code: string;
+    @SpeakeasyMetadata()
+    @Expose({ name: "code" })
+    code: string;
 
-  /**
-   * Error message
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "message" })
-  message: string;
+    /**
+     * Error message
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "message" })
+    message: string;
 }

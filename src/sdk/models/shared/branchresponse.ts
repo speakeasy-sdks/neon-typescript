@@ -10,8 +10,8 @@ import { Expose, Type } from "class-transformer";
  * Returned information about the specified branch
  */
 export class BranchResponse extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  @Expose({ name: "branch" })
-  @Type(() => Branch)
-  branch: Branch;
+    @SpeakeasyMetadata()
+    @Expose({ name: "branch" })
+    @Type(() => Branch)
+    branch: Branch;
 }

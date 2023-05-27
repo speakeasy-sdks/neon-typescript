@@ -7,42 +7,38 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 
 export class GetProjectEndpointRequest extends SpeakeasyBase {
-  /**
-   * The endpoint ID
-   */
-  @SpeakeasyMetadata({
-    data: "pathParam, style=simple;explode=false;name=endpoint_id",
-  })
-  endpointId: string;
+    /**
+     * The endpoint ID
+     */
+    @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=endpoint_id" })
+    endpointId: string;
 
-  /**
-   * The Neon project ID
-   */
-  @SpeakeasyMetadata({
-    data: "pathParam, style=simple;explode=false;name=project_id",
-  })
-  projectId: string;
+    /**
+     * The Neon project ID
+     */
+    @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project_id" })
+    projectId: string;
 }
 
 export class GetProjectEndpointResponse extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  contentType: string;
+    @SpeakeasyMetadata()
+    contentType: string;
 
-  /**
-   * Returned information about the specified endpoint
-   */
-  @SpeakeasyMetadata()
-  endpointResponse?: shared.EndpointResponse;
+    /**
+     * Returned information about the specified endpoint
+     */
+    @SpeakeasyMetadata()
+    endpointResponse?: shared.EndpointResponse;
 
-  /**
-   * General Error
-   */
-  @SpeakeasyMetadata()
-  generalError?: shared.GeneralError;
+    /**
+     * General Error
+     */
+    @SpeakeasyMetadata()
+    generalError?: shared.GeneralError;
 
-  @SpeakeasyMetadata()
-  statusCode: number;
+    @SpeakeasyMetadata()
+    statusCode: number;
 
-  @SpeakeasyMetadata()
-  rawResponse?: AxiosResponse;
+    @SpeakeasyMetadata()
+    rawResponse?: AxiosResponse;
 }

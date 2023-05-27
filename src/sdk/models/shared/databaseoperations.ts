@@ -11,13 +11,13 @@ import { Expose, Type } from "class-transformer";
  * Created a database in the specified branch
  */
 export class DatabaseOperations extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  @Expose({ name: "database" })
-  @Type(() => Database)
-  database: Database;
+    @SpeakeasyMetadata()
+    @Expose({ name: "database" })
+    @Type(() => Database)
+    database: Database;
 
-  @SpeakeasyMetadata({ elemType: Operation })
-  @Expose({ name: "operations" })
-  @Type(() => Operation)
-  operations: Operation[];
+    @SpeakeasyMetadata({ elemType: Operation })
+    @Expose({ name: "operations" })
+    @Type(() => Operation)
+    operations: Operation[];
 }

@@ -8,44 +8,44 @@ import { Provisioner } from "./provisioner";
 import { Expose } from "class-transformer";
 
 export class BranchCreateRequestEndpointOptions extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  @Expose({ name: "autoscaling_limit_max_cu" })
-  autoscalingLimitMaxCu?: number;
+    @SpeakeasyMetadata()
+    @Expose({ name: "autoscaling_limit_max_cu" })
+    autoscalingLimitMaxCu?: number;
 
-  @SpeakeasyMetadata()
-  @Expose({ name: "autoscaling_limit_min_cu" })
-  autoscalingLimitMinCu?: number;
+    @SpeakeasyMetadata()
+    @Expose({ name: "autoscaling_limit_min_cu" })
+    autoscalingLimitMinCu?: number;
 
-  /**
-   * The Neon compute provisioner.
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "provisioner" })
-  provisioner?: Provisioner;
+    /**
+     * The Neon compute provisioner.
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "provisioner" })
+    provisioner?: Provisioner;
 
-  /**
-   * Duration of inactivity in seconds after which endpoint will be
-   *
-   * @remarks
-   * automatically suspended. Value `0` means use global default,
-   * `-1` means never suspend. Maximum value is 1 week in seconds.
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "suspend_timeout_seconds" })
-  suspendTimeoutSeconds?: number;
+    /**
+     * Duration of inactivity in seconds after which endpoint will be
+     *
+     * @remarks
+     * automatically suspended. Value `0` means use global default,
+     * `-1` means never suspend. Maximum value is 1 week in seconds.
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "suspend_timeout_seconds" })
+    suspendTimeoutSeconds?: number;
 
-  /**
-   * The compute endpoint type. Either `read_write` or `read_only`.
-   *
-   * @remarks
-   * The `read_only` compute endpoint type is not yet supported.
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "type" })
-  type: EndpointType;
+    /**
+     * The compute endpoint type. Either `read_write` or `read_only`.
+     *
+     * @remarks
+     * The `read_only` compute endpoint type is not yet supported.
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "type" })
+    type: EndpointType;
 }

@@ -11,13 +11,13 @@ import { Expose, Type } from "class-transformer";
  * Created a role in the specified branch
  */
 export class RoleOperations extends SpeakeasyBase {
-  @SpeakeasyMetadata({ elemType: Operation })
-  @Expose({ name: "operations" })
-  @Type(() => Operation)
-  operations: Operation[];
+    @SpeakeasyMetadata({ elemType: Operation })
+    @Expose({ name: "operations" })
+    @Type(() => Operation)
+    operations: Operation[];
 
-  @SpeakeasyMetadata()
-  @Expose({ name: "role" })
-  @Type(() => Role)
-  role: Role;
+    @SpeakeasyMetadata()
+    @Expose({ name: "role" })
+    @Type(() => Role)
+    role: Role;
 }

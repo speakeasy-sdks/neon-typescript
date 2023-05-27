@@ -9,98 +9,98 @@ import { Provisioner } from "./provisioner";
 import { Expose, Type } from "class-transformer";
 
 export class EndpointUpdateRequestEndpoint extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  @Expose({ name: "autoscaling_limit_max_cu" })
-  autoscalingLimitMaxCu?: number;
+    @SpeakeasyMetadata()
+    @Expose({ name: "autoscaling_limit_max_cu" })
+    autoscalingLimitMaxCu?: number;
 
-  @SpeakeasyMetadata()
-  @Expose({ name: "autoscaling_limit_min_cu" })
-  autoscalingLimitMinCu?: number;
+    @SpeakeasyMetadata()
+    @Expose({ name: "autoscaling_limit_min_cu" })
+    autoscalingLimitMinCu?: number;
 
-  /**
-   * The destination branch ID. The destination branch must not have an exsiting read-write endpoint.
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "branch_id" })
-  branchId?: string;
+    /**
+     * The destination branch ID. The destination branch must not have an exsiting read-write endpoint.
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "branch_id" })
+    branchId?: string;
 
-  /**
-   * Whether to restrict connections to the compute endpoint
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "disabled" })
-  disabled?: boolean;
+    /**
+     * Whether to restrict connections to the compute endpoint
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "disabled" })
+    disabled?: boolean;
 
-  /**
-   * NOT YET IMPLEMENTED. Whether to permit passwordless access to the compute endpoint.
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "passwordless_access" })
-  passwordlessAccess?: boolean;
+    /**
+     * NOT YET IMPLEMENTED. Whether to permit passwordless access to the compute endpoint.
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "passwordless_access" })
+    passwordlessAccess?: boolean;
 
-  /**
-   * Whether to enable connection pooling for the compute endpoint
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "pooler_enabled" })
-  poolerEnabled?: boolean;
+    /**
+     * Whether to enable connection pooling for the compute endpoint
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "pooler_enabled" })
+    poolerEnabled?: boolean;
 
-  /**
-   * The connection pooler mode. Neon supports PgBouncer in `transaction` mode only.
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "pooler_mode" })
-  poolerMode?: EndpointPoolerMode;
+    /**
+     * The connection pooler mode. Neon supports PgBouncer in `transaction` mode only.
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "pooler_mode" })
+    poolerMode?: EndpointPoolerMode;
 
-  /**
-   * The Neon compute provisioner.
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "provisioner" })
-  provisioner?: Provisioner;
+    /**
+     * The Neon compute provisioner.
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "provisioner" })
+    provisioner?: Provisioner;
 
-  /**
-   * A collection of settings for a compute endpoint
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "settings" })
-  @Type(() => EndpointSettingsData)
-  settings?: EndpointSettingsData;
+    /**
+     * A collection of settings for a compute endpoint
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "settings" })
+    @Type(() => EndpointSettingsData)
+    settings?: EndpointSettingsData;
 
-  /**
-   * Duration of inactivity in seconds after which endpoint will be
-   *
-   * @remarks
-   * automatically suspended. Value `0` means use global default,
-   * `-1` means never suspend. Maximum value is 1 week in seconds.
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "suspend_timeout_seconds" })
-  suspendTimeoutSeconds?: number;
+    /**
+     * Duration of inactivity in seconds after which endpoint will be
+     *
+     * @remarks
+     * automatically suspended. Value `0` means use global default,
+     * `-1` means never suspend. Maximum value is 1 week in seconds.
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "suspend_timeout_seconds" })
+    suspendTimeoutSeconds?: number;
 }
 
 export class EndpointUpdateRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  @Expose({ name: "endpoint" })
-  @Type(() => EndpointUpdateRequestEndpoint)
-  endpoint: EndpointUpdateRequestEndpoint;
+    @SpeakeasyMetadata()
+    @Expose({ name: "endpoint" })
+    @Type(() => EndpointUpdateRequestEndpoint)
+    endpoint: EndpointUpdateRequestEndpoint;
 }

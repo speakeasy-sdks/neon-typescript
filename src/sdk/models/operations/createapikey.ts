@@ -7,24 +7,24 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 
 export class CreateApiKeyResponse extends SpeakeasyBase {
-  /**
-   * Created an API key
-   */
-  @SpeakeasyMetadata()
-  apiKeyCreateResponse?: shared.ApiKeyCreateResponse;
+    /**
+     * Created an API key
+     */
+    @SpeakeasyMetadata()
+    apiKeyCreateResponse?: shared.ApiKeyCreateResponse;
 
-  @SpeakeasyMetadata()
-  contentType: string;
+    @SpeakeasyMetadata()
+    contentType: string;
 
-  /**
-   * General Error
-   */
-  @SpeakeasyMetadata()
-  generalError?: shared.GeneralError;
+    /**
+     * General Error
+     */
+    @SpeakeasyMetadata()
+    generalError?: shared.GeneralError;
 
-  @SpeakeasyMetadata()
-  statusCode: number;
+    @SpeakeasyMetadata()
+    statusCode: number;
 
-  @SpeakeasyMetadata()
-  rawResponse?: AxiosResponse;
+    @SpeakeasyMetadata()
+    rawResponse?: AxiosResponse;
 }

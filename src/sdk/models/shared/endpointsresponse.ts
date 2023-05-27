@@ -10,8 +10,8 @@ import { Expose, Type } from "class-transformer";
  * Returned a list of endpoints for the specified branch
  */
 export class EndpointsResponse extends SpeakeasyBase {
-  @SpeakeasyMetadata({ elemType: Endpoint })
-  @Expose({ name: "endpoints" })
-  @Type(() => Endpoint)
-  endpoints: Endpoint[];
+    @SpeakeasyMetadata({ elemType: Endpoint })
+    @Expose({ name: "endpoints" })
+    @Type(() => Endpoint)
+    endpoints: Endpoint[];
 }

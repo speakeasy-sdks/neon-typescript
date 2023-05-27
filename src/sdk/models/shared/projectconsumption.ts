@@ -6,93 +6,93 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Transform } from "class-transformer";
 
 export class ProjectConsumption extends SpeakeasyBase {
-  /**
-   * Seconds. Control plane observed endpoints of this project being active this amount of wall-clock time.
-   *
-   * @remarks
-   * The value has some lag.
-   * The value is reset at the beginning of each billing period.
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "active_time_seconds" })
-  activeTimeSeconds: number;
+    /**
+     * Seconds. Control plane observed endpoints of this project being active this amount of wall-clock time.
+     *
+     * @remarks
+     * The value has some lag.
+     * The value is reset at the beginning of each billing period.
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "active_time_seconds" })
+    activeTimeSeconds: number;
 
-  /**
-   * Seconds. The number of CPU seconds used by the project's compute endpoints, including compute endpoints that have been deleted.
-   *
-   * @remarks
-   * The value has some lag. The value is reset at the beginning of each billing period.
-   * Examples:
-   * 1. An endpoint that uses 1 CPU for 1 second is equal to `compute_time=1`.
-   * 2. An endpoint that uses 2 CPUs simultaneously for 1 second is equal to `compute_time=2`.
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "compute_time_seconds" })
-  computeTimeSeconds: number;
+    /**
+     * Seconds. The number of CPU seconds used by the project's compute endpoints, including compute endpoints that have been deleted.
+     *
+     * @remarks
+     * The value has some lag. The value is reset at the beginning of each billing period.
+     * Examples:
+     * 1. An endpoint that uses 1 CPU for 1 second is equal to `compute_time=1`.
+     * 2. An endpoint that uses 2 CPUs simultaneously for 1 second is equal to `compute_time=2`.
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "compute_time_seconds" })
+    computeTimeSeconds: number;
 
-  /**
-   * Bytes-Hour. Project consumed that much storage hourly during the billing period. The value has some lag.
-   *
-   * @remarks
-   * The value is reset at the beginning of each billing period.
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "data_storage_bytes_hour" })
-  dataStorageBytesHour: number;
+    /**
+     * Bytes-Hour. Project consumed that much storage hourly during the billing period. The value has some lag.
+     *
+     * @remarks
+     * The value is reset at the beginning of each billing period.
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "data_storage_bytes_hour" })
+    dataStorageBytesHour: number;
 
-  /**
-   * Bytes. Egress traffic from the Neon cloud to the client for given project over the billing period.
-   *
-   * @remarks
-   * Includes deleted endpoints. The value has some lag. The value is reset at the beginning of each billing period.
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "data_transfer_bytes" })
-  dataTransferBytes: number;
+    /**
+     * Bytes. Egress traffic from the Neon cloud to the client for given project over the billing period.
+     *
+     * @remarks
+     * Includes deleted endpoints. The value has some lag. The value is reset at the beginning of each billing period.
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "data_transfer_bytes" })
+    dataTransferBytes: number;
 
-  /**
-   * The project ID
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "id" })
-  id: string;
+    /**
+     * The project ID
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "id" })
+    id: string;
 
-  /**
-   * Bytes. Current space occupied by project in the storage. The value has some lag.
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "synthetic_storage_size" })
-  syntheticStorageSize: number;
+    /**
+     * Bytes. Current space occupied by project in the storage. The value has some lag.
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "synthetic_storage_size" })
+    syntheticStorageSize: number;
 
-  /**
-   * A timestamp indicating when the project was last updated
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "updated_at" })
-  @Transform(({ value }) => new Date(value), { toClassOnly: true })
-  updatedAt: Date;
+    /**
+     * A timestamp indicating when the project was last updated
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "updated_at" })
+    @Transform(({ value }) => new Date(value), { toClassOnly: true })
+    updatedAt: Date;
 
-  /**
-   * Bytes. Amount of WAL that travelled through storage for given project across all branches.
-   *
-   * @remarks
-   * The value has some lag. The value is reset at the beginning of each billing period.
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "written_data_bytes" })
-  writtenDataBytes: number;
+    /**
+     * Bytes. Amount of WAL that travelled through storage for given project across all branches.
+     *
+     * @remarks
+     * The value has some lag. The value is reset at the beginning of each billing period.
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "written_data_bytes" })
+    writtenDataBytes: number;
 }

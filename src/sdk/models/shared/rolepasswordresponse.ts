@@ -9,13 +9,13 @@ import { Expose } from "class-transformer";
  * Successfully returned password for the specified role
  */
 export class RolePasswordResponse extends SpeakeasyBase {
-  /**
-   * The role password
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "password" })
-  password: string;
+    /**
+     * The role password
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "password" })
+    password: string;
 }

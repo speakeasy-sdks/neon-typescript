@@ -8,63 +8,61 @@ import { AxiosResponse } from "axios";
 import { Expose, Type } from "class-transformer";
 
 export class ListProjectsRequest extends SpeakeasyBase {
-  /**
-   * Specify the cursor value from the previous response to get the next batch of projects.
-   */
-  @SpeakeasyMetadata({
-    data: "queryParam, style=form;explode=true;name=cursor",
-  })
-  cursor?: string;
+    /**
+     * Specify the cursor value from the previous response to get the next batch of projects.
+     */
+    @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=cursor" })
+    cursor?: string;
 
-  /**
-   * Specify a value from 1 to 100 to limit number of projects in the response.
-   */
-  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
-  limit?: number;
+    /**
+     * Specify a value from 1 to 100 to limit number of projects in the response.
+     */
+    @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
+    limit?: number;
 }
 
 /**
  * Returned a list of projects for the Neon account
  */
 export class ListProjects200ApplicationJSON extends SpeakeasyBase {
-  /**
-   * Cursor based pagination is used. The user must pass the cursor as is to the backend.
-   *
-   * @remarks
-   * For more information about cursor based pagination, see
-   * https://learn.microsoft.com/en-us/ef/core/querying/pagination#keyset-pagination
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "pagination" })
-  @Type(() => shared.Pagination)
-  pagination?: shared.Pagination;
+    /**
+     * Cursor based pagination is used. The user must pass the cursor as is to the backend.
+     *
+     * @remarks
+     * For more information about cursor based pagination, see
+     * https://learn.microsoft.com/en-us/ef/core/querying/pagination#keyset-pagination
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "pagination" })
+    @Type(() => shared.Pagination)
+    pagination?: shared.Pagination;
 
-  @SpeakeasyMetadata({ elemType: shared.ProjectListItem })
-  @Expose({ name: "projects" })
-  @Type(() => shared.ProjectListItem)
-  projects: shared.ProjectListItem[];
+    @SpeakeasyMetadata({ elemType: shared.ProjectListItem })
+    @Expose({ name: "projects" })
+    @Type(() => shared.ProjectListItem)
+    projects: shared.ProjectListItem[];
 }
 
 export class ListProjectsResponse extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  contentType: string;
+    @SpeakeasyMetadata()
+    contentType: string;
 
-  /**
-   * General Error
-   */
-  @SpeakeasyMetadata()
-  generalError?: shared.GeneralError;
+    /**
+     * General Error
+     */
+    @SpeakeasyMetadata()
+    generalError?: shared.GeneralError;
 
-  @SpeakeasyMetadata()
-  statusCode: number;
+    @SpeakeasyMetadata()
+    statusCode: number;
 
-  @SpeakeasyMetadata()
-  rawResponse?: AxiosResponse;
+    @SpeakeasyMetadata()
+    rawResponse?: AxiosResponse;
 
-  /**
-   * Returned a list of projects for the Neon account
-   */
-  @SpeakeasyMetadata()
-  listProjects200ApplicationJSONObject?: ListProjects200ApplicationJSON;
+    /**
+     * Returned a list of projects for the Neon account
+     */
+    @SpeakeasyMetadata()
+    listProjects200ApplicationJSONObject?: ListProjects200ApplicationJSON;
 }

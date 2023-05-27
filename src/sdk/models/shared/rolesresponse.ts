@@ -10,8 +10,8 @@ import { Expose, Type } from "class-transformer";
  * Returned a list of roles from the specified branch.
  */
 export class RolesResponse extends SpeakeasyBase {
-  @SpeakeasyMetadata({ elemType: Role })
-  @Expose({ name: "roles" })
-  @Type(() => Role)
-  roles: Role[];
+    @SpeakeasyMetadata({ elemType: Role })
+    @Expose({ name: "roles" })
+    @Type(() => Role)
+    roles: Role[];
 }

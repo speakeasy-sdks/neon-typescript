@@ -6,65 +6,65 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Transform } from "class-transformer";
 
 export class Role extends SpeakeasyBase {
-  /**
-   * The ID of the branch to which the role belongs
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "branch_id" })
-  branchId: string;
+    /**
+     * The ID of the branch to which the role belongs
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "branch_id" })
+    branchId: string;
 
-  /**
-   * A timestamp indicating when the role was created
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "created_at" })
-  @Transform(({ value }) => new Date(value), { toClassOnly: true })
-  createdAt: Date;
+    /**
+     * A timestamp indicating when the role was created
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "created_at" })
+    @Transform(({ value }) => new Date(value), { toClassOnly: true })
+    createdAt: Date;
 
-  /**
-   * The role name
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "name" })
-  name: string;
+    /**
+     * The role name
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "name" })
+    name: string;
 
-  /**
-   * The role password
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "password" })
-  password?: string;
+    /**
+     * The role password
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "password" })
+    password?: string;
 
-  /**
-   * Whether or not the role is system-protected
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "protected" })
-  protected?: boolean;
+    /**
+     * Whether or not the role is system-protected
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "protected" })
+    protected?: boolean;
 
-  /**
-   * A timestamp indicating when the role was last updated
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "updated_at" })
-  @Transform(({ value }) => new Date(value), { toClassOnly: true })
-  updatedAt: Date;
+    /**
+     * A timestamp indicating when the role was last updated
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "updated_at" })
+    @Transform(({ value }) => new Date(value), { toClassOnly: true })
+    updatedAt: Date;
 }

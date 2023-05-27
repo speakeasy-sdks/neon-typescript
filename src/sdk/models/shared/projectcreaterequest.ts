@@ -8,111 +8,111 @@ import { Provisioner } from "./provisioner";
 import { Expose, Type } from "class-transformer";
 
 export class ProjectCreateRequestProjectBranch extends SpeakeasyBase {
-  /**
-   * The database name. If not specified, the default database name will be used.
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "database_name" })
-  databaseName?: string;
+    /**
+     * The database name. If not specified, the default database name will be used.
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "database_name" })
+    databaseName?: string;
 
-  /**
-   * The branch name. If not specified, the default branch name will be used.
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "name" })
-  name?: string;
+    /**
+     * The branch name. If not specified, the default branch name will be used.
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "name" })
+    name?: string;
 
-  /**
-   * The role name. If not specified, the default role name will be used.
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "role_name" })
-  roleName?: string;
+    /**
+     * The role name. If not specified, the default role name will be used.
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "role_name" })
+    roleName?: string;
 }
 
 export class ProjectCreateRequestProject extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  @Expose({ name: "autoscaling_limit_max_cu" })
-  autoscalingLimitMaxCu?: number;
+    @SpeakeasyMetadata()
+    @Expose({ name: "autoscaling_limit_max_cu" })
+    autoscalingLimitMaxCu?: number;
 
-  @SpeakeasyMetadata()
-  @Expose({ name: "autoscaling_limit_min_cu" })
-  autoscalingLimitMinCu?: number;
+    @SpeakeasyMetadata()
+    @Expose({ name: "autoscaling_limit_min_cu" })
+    autoscalingLimitMinCu?: number;
 
-  @SpeakeasyMetadata()
-  @Expose({ name: "branch" })
-  @Type(() => ProjectCreateRequestProjectBranch)
-  branch?: ProjectCreateRequestProjectBranch;
+    @SpeakeasyMetadata()
+    @Expose({ name: "branch" })
+    @Type(() => ProjectCreateRequestProjectBranch)
+    branch?: ProjectCreateRequestProjectBranch;
 
-  /**
-   * A raw representation of PostgreSQL settings
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "default_endpoint_settings" })
-  defaultEndpointSettings?: Record<string, string>;
+    /**
+     * A raw representation of PostgreSQL settings
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "default_endpoint_settings" })
+    defaultEndpointSettings?: Record<string, string>;
 
-  /**
-   * The project name
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "name" })
-  name?: string;
+    /**
+     * The project name
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "name" })
+    name?: string;
 
-  /**
-   * The major PostgreSQL version number. Currently supported version are `14` and `15`.
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "pg_version" })
-  pgVersion?: number;
+    /**
+     * The major PostgreSQL version number. Currently supported version are `14` and `15`.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "pg_version" })
+    pgVersion?: number;
 
-  /**
-   * The Neon compute provisioner.
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "provisioner" })
-  provisioner?: Provisioner;
+    /**
+     * The Neon compute provisioner.
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "provisioner" })
+    provisioner?: Provisioner;
 
-  /**
-   * The region identifier. See [the documentation](https://neon.tech/docs/introduction/regions) for the list of supported regions.
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "region_id" })
-  regionId?: string;
+    /**
+     * The region identifier. See [the documentation](https://neon.tech/docs/introduction/regions) for the list of supported regions.
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "region_id" })
+    regionId?: string;
 
-  @SpeakeasyMetadata()
-  @Expose({ name: "settings" })
-  @Type(() => ProjectSettingsData)
-  settings?: ProjectSettingsData;
+    @SpeakeasyMetadata()
+    @Expose({ name: "settings" })
+    @Type(() => ProjectSettingsData)
+    settings?: ProjectSettingsData;
 
-  /**
-   * Whether or not passwords are stored for roles in the Neon project. Storing passwords facilitates access to Neon features that require authorization.
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "store_passwords" })
-  storePasswords?: boolean;
+    /**
+     * Whether or not passwords are stored for roles in the Neon project. Storing passwords facilitates access to Neon features that require authorization.
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "store_passwords" })
+    storePasswords?: boolean;
 }
 
 export class ProjectCreateRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  @Expose({ name: "project" })
-  @Type(() => ProjectCreateRequestProject)
-  project: ProjectCreateRequestProject;
+    @SpeakeasyMetadata()
+    @Expose({ name: "project" })
+    @Type(() => ProjectCreateRequestProject)
+    project: ProjectCreateRequestProject;
 }

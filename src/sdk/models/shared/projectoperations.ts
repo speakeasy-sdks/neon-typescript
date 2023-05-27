@@ -11,13 +11,13 @@ import { Expose, Type } from "class-transformer";
  * Updated the specified project
  */
 export class ProjectOperations extends SpeakeasyBase {
-  @SpeakeasyMetadata({ elemType: Operation })
-  @Expose({ name: "operations" })
-  @Type(() => Operation)
-  operations: Operation[];
+    @SpeakeasyMetadata({ elemType: Operation })
+    @Expose({ name: "operations" })
+    @Type(() => Operation)
+    operations: Operation[];
 
-  @SpeakeasyMetadata()
-  @Expose({ name: "project" })
-  @Type(() => Project)
-  project: Project;
+    @SpeakeasyMetadata()
+    @Expose({ name: "project" })
+    @Type(() => Project)
+    project: Project;
 }

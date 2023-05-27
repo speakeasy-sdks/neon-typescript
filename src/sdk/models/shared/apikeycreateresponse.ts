@@ -9,17 +9,17 @@ import { Expose } from "class-transformer";
  * Created an API key
  */
 export class ApiKeyCreateResponse extends SpeakeasyBase {
-  /**
-   * The API key ID
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "id" })
-  id: number;
+    /**
+     * The API key ID
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "id" })
+    id: number;
 
-  /**
-   * The generated 64-bit token required to access the Neon API
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "key" })
-  key: string;
+    /**
+     * The generated 64-bit token required to access the Neon API
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "key" })
+    key: string;
 }

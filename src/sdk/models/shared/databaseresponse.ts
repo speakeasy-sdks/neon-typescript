@@ -10,8 +10,8 @@ import { Expose, Type } from "class-transformer";
  * Returned the database details
  */
 export class DatabaseResponse extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  @Expose({ name: "database" })
-  @Type(() => Database)
-  database: Database;
+    @SpeakeasyMetadata()
+    @Expose({ name: "database" })
+    @Type(() => Database)
+    database: Database;
 }

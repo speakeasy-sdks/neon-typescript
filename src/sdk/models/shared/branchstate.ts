@@ -6,6 +6,6 @@
  * The branch state
  */
 export enum BranchState {
-  Init = "init",
-  Ready = "ready",
+    Init = "init",
+    Ready = "ready",
 }

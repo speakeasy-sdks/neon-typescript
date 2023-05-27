@@ -7,26 +7,26 @@ import { ProjectSettingsData } from "./projectsettingsdata";
 import { Expose, Type } from "class-transformer";
 
 export class ProjectUpdateRequestProject extends SpeakeasyBase {
-  /**
-   * A raw representation of PostgreSQL settings
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "default_endpoint_settings" })
-  defaultEndpointSettings?: Record<string, string>;
+    /**
+     * A raw representation of PostgreSQL settings
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "default_endpoint_settings" })
+    defaultEndpointSettings?: Record<string, string>;
 
-  @SpeakeasyMetadata()
-  @Expose({ name: "name" })
-  name?: string;
+    @SpeakeasyMetadata()
+    @Expose({ name: "name" })
+    name?: string;
 
-  @SpeakeasyMetadata()
-  @Expose({ name: "settings" })
-  @Type(() => ProjectSettingsData)
-  settings?: ProjectSettingsData;
+    @SpeakeasyMetadata()
+    @Expose({ name: "settings" })
+    @Type(() => ProjectSettingsData)
+    settings?: ProjectSettingsData;
 }
 
 export class ProjectUpdateRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  @Expose({ name: "project" })
-  @Type(() => ProjectUpdateRequestProject)
-  project: ProjectUpdateRequestProject;
+    @SpeakeasyMetadata()
+    @Expose({ name: "project" })
+    @Type(() => ProjectUpdateRequestProject)
+    project: ProjectUpdateRequestProject;
 }

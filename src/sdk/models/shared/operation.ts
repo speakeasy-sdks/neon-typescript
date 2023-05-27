@@ -8,83 +8,83 @@ import { OperationStatus } from "./operationstatus";
 import { Expose, Transform } from "class-transformer";
 
 export class Operation extends SpeakeasyBase {
-  /**
-   * The action performed by the operation
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "action" })
-  action: OperationAction;
+    /**
+     * The action performed by the operation
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "action" })
+    action: OperationAction;
 
-  /**
-   * The branch ID
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "branch_id" })
-  branchId?: string;
+    /**
+     * The branch ID
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "branch_id" })
+    branchId?: string;
 
-  /**
-   * A timestamp indicating when the operation was created
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "created_at" })
-  @Transform(({ value }) => new Date(value), { toClassOnly: true })
-  createdAt: Date;
+    /**
+     * A timestamp indicating when the operation was created
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "created_at" })
+    @Transform(({ value }) => new Date(value), { toClassOnly: true })
+    createdAt: Date;
 
-  /**
-   * The endpoint ID
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "endpoint_id" })
-  endpointId?: string;
+    /**
+     * The endpoint ID
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "endpoint_id" })
+    endpointId?: string;
 
-  /**
-   * The error that occured
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "error" })
-  error?: string;
+    /**
+     * The error that occured
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "error" })
+    error?: string;
 
-  /**
-   * The number of times the operation failed
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "failures_count" })
-  failuresCount: number;
+    /**
+     * The number of times the operation failed
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "failures_count" })
+    failuresCount: number;
 
-  /**
-   * The operation ID
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "id" })
-  id: string;
+    /**
+     * The operation ID
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "id" })
+    id: string;
 
-  /**
-   * The Neon project ID
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "project_id" })
-  projectId: string;
+    /**
+     * The Neon project ID
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "project_id" })
+    projectId: string;
 
-  /**
-   * A timestamp indicating when the operation was last retried
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "retry_at" })
-  @Transform(({ value }) => new Date(value), { toClassOnly: true })
-  retryAt?: Date;
+    /**
+     * A timestamp indicating when the operation was last retried
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "retry_at" })
+    @Transform(({ value }) => new Date(value), { toClassOnly: true })
+    retryAt?: Date;
 
-  /**
-   * The status of the operation
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "status" })
-  status: OperationStatus;
+    /**
+     * The status of the operation
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "status" })
+    status: OperationStatus;
 
-  /**
-   * A timestamp indicating when the operation status was last updated
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "updated_at" })
-  @Transform(({ value }) => new Date(value), { toClassOnly: true })
-  updatedAt: Date;
+    /**
+     * A timestamp indicating when the operation status was last updated
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "updated_at" })
+    @Transform(({ value }) => new Date(value), { toClassOnly: true })
+    updatedAt: Date;
 }

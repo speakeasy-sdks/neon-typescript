@@ -9,7 +9,7 @@
  *
  */
 export enum EndpointState {
-  Init = "init",
-  Active = "active",
-  Idle = "idle",
+    Init = "init",
+    Active = "active",
+    Idle = "idle",
 }

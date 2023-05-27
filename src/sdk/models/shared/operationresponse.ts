@@ -10,8 +10,8 @@ import { Expose, Type } from "class-transformer";
  * Returned details for the specified operation
  */
 export class OperationResponse extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  @Expose({ name: "operation" })
-  @Type(() => Operation)
-  operation: Operation;
+    @SpeakeasyMetadata()
+    @Expose({ name: "operation" })
+    @Type(() => Operation)
+    operation: Operation;
 }

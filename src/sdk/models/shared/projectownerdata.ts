@@ -7,22 +7,22 @@ import { BillingSubscriptionType } from "./billingsubscriptiontype";
 import { Expose } from "class-transformer";
 
 export class ProjectOwnerData extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  @Expose({ name: "branches_limit" })
-  branchesLimit: number;
+    @SpeakeasyMetadata()
+    @Expose({ name: "branches_limit" })
+    branchesLimit: number;
 
-  @SpeakeasyMetadata()
-  @Expose({ name: "email" })
-  email: string;
+    @SpeakeasyMetadata()
+    @Expose({ name: "email" })
+    email: string;
 
-  /**
-   * Type of subscription to Neon Cloud.
-   *
-   * @remarks
-   * Notice that for users without billing account this will be "UNKNOWN"
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "subscription_type" })
-  subscriptionType: BillingSubscriptionType;
+    /**
+     * Type of subscription to Neon Cloud.
+     *
+     * @remarks
+     * Notice that for users without billing account this will be "UNKNOWN"
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "subscription_type" })
+    subscriptionType: BillingSubscriptionType;
 }

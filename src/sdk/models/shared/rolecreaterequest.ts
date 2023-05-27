@@ -6,20 +6,20 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Type } from "class-transformer";
 
 export class RoleCreateRequestRole extends SpeakeasyBase {
-  /**
-   * The role name. Cannot exceed 63 bytes in length.
-   *
-   * @remarks
-   *
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "name" })
-  name: string;
+    /**
+     * The role name. Cannot exceed 63 bytes in length.
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "name" })
+    name: string;
 }
 
 export class RoleCreateRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  @Expose({ name: "role" })
-  @Type(() => RoleCreateRequestRole)
-  role: RoleCreateRequestRole;
+    @SpeakeasyMetadata()
+    @Expose({ name: "role" })
+    @Type(() => RoleCreateRequestRole)
+    role: RoleCreateRequestRole;
 }

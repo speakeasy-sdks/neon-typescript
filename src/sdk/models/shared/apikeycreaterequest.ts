@@ -6,10 +6,10 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
 export class ApiKeyCreateRequest extends SpeakeasyBase {
-  /**
-   * A user-specified API key name. This value is required when creating an API key.
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "key_name" })
-  keyName: string;
+    /**
+     * A user-specified API key name. This value is required when creating an API key.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "key_name" })
+    keyName: string;
 }
