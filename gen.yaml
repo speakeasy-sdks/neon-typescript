@@ -2,8 +2,8 @@ configVersion: 1.0.0
 management:
   docChecksum: 92f160f803aa4c783644d2b9dbe66176
   docVersion: v2
-  speakeasyVersion: 1.39.0
-  generationVersion: 2.32.7
+  speakeasyVersion: 1.40.2
+  generationVersion: 2.34.2
 generation:
   comments:
     disableComments: false
@@ -14,7 +14,7 @@ generation:
   tagNamespacingDisabled: false
   telemetryEnabled: false
 typescript:
-  version: 1.0.1
+  version: 1.1.0
   author: neon
   maxMethodParams: 0
   packageName: neon-api

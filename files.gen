@@ -6,6 +6,7 @@ src/sdk/preview.ts
 src/sdk/project.ts
 src/sdk/sdk.ts
 .eslintrc.yml
+.gitignore
 jest.config.js
 package-lock.json
 package.json
