@@ -22,7 +22,7 @@ import { ListProjectsConsumptionResponse } from "neon-api/dist/sdk/models/operat
 
 const sdk = new NeonApi({
   security: {
-    bearerAuth: "YOUR_BEARER_TOKEN_HERE",
+    bearerAuth: "",
   },
 });
 

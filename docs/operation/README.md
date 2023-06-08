@@ -26,7 +26,7 @@ import { OperationAction, OperationStatus } from "neon-api/dist/sdk/models/share
 
 const sdk = new NeonApi({
   security: {
-    bearerAuth: "YOUR_BEARER_TOKEN_HERE",
+    bearerAuth: "",
   },
 });
 
@@ -58,7 +58,7 @@ import { OperationAction, OperationStatus } from "neon-api/dist/sdk/models/share
 
 const sdk = new NeonApi({
   security: {
-    bearerAuth: "YOUR_BEARER_TOKEN_HERE",
+    bearerAuth: "",
   },
 });
 

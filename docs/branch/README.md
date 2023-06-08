@@ -52,7 +52,7 @@ import {
 
 const sdk = new NeonApi({
   security: {
-    bearerAuth: "YOUR_BEARER_TOKEN_HERE",
+    bearerAuth: "",
   },
 });
 
@@ -107,7 +107,7 @@ import { OperationAction, OperationStatus } from "neon-api/dist/sdk/models/share
 
 const sdk = new NeonApi({
   security: {
-    bearerAuth: "YOUR_BEARER_TOKEN_HERE",
+    bearerAuth: "",
   },
 });
 
@@ -148,7 +148,7 @@ import { OperationAction, OperationStatus } from "neon-api/dist/sdk/models/share
 
 const sdk = new NeonApi({
   security: {
-    bearerAuth: "YOUR_BEARER_TOKEN_HERE",
+    bearerAuth: "",
   },
 });
 
@@ -191,7 +191,7 @@ import { BranchState, OperationAction, OperationStatus } from "neon-api/dist/sdk
 
 const sdk = new NeonApi({
   security: {
-    bearerAuth: "YOUR_BEARER_TOKEN_HERE",
+    bearerAuth: "",
   },
 });
 
@@ -222,7 +222,7 @@ import { OperationAction, OperationStatus } from "neon-api/dist/sdk/models/share
 
 const sdk = new NeonApi({
   security: {
-    bearerAuth: "YOUR_BEARER_TOKEN_HERE",
+    bearerAuth: "",
   },
 });
 
@@ -256,7 +256,7 @@ import { OperationAction, OperationStatus } from "neon-api/dist/sdk/models/share
 
 const sdk = new NeonApi({
   security: {
-    bearerAuth: "YOUR_BEARER_TOKEN_HERE",
+    bearerAuth: "",
   },
 });
 
@@ -293,7 +293,7 @@ import { BranchState } from "neon-api/dist/sdk/models/shared";
 
 const sdk = new NeonApi({
   security: {
-    bearerAuth: "YOUR_BEARER_TOKEN_HERE",
+    bearerAuth: "",
   },
 });
 
@@ -323,7 +323,7 @@ import { GetProjectBranchDatabaseResponse } from "neon-api/dist/sdk/models/opera
 
 const sdk = new NeonApi({
   security: {
-    bearerAuth: "YOUR_BEARER_TOKEN_HERE",
+    bearerAuth: "",
   },
 });
 
@@ -356,7 +356,7 @@ import { GetProjectBranchRoleResponse } from "neon-api/dist/sdk/models/operation
 
 const sdk = new NeonApi({
   security: {
-    bearerAuth: "YOUR_BEARER_TOKEN_HERE",
+    bearerAuth: "",
   },
 });
 
@@ -389,7 +389,7 @@ import { GetProjectBranchRolePasswordResponse } from "neon-api/dist/sdk/models/o
 
 const sdk = new NeonApi({
   security: {
-    bearerAuth: "YOUR_BEARER_TOKEN_HERE",
+    bearerAuth: "",
   },
 });
 
@@ -421,7 +421,7 @@ import { ListProjectBranchDatabasesResponse } from "neon-api/dist/sdk/models/ope
 
 const sdk = new NeonApi({
   security: {
-    bearerAuth: "YOUR_BEARER_TOKEN_HERE",
+    bearerAuth: "",
   },
 });
 
@@ -452,7 +452,7 @@ import { EndpointPoolerMode, EndpointState, EndpointType, Provisioner } from "ne
 
 const sdk = new NeonApi({
   security: {
-    bearerAuth: "YOUR_BEARER_TOKEN_HERE",
+    bearerAuth: "",
   },
 });
 
@@ -483,7 +483,7 @@ import { ListProjectBranchRolesResponse } from "neon-api/dist/sdk/models/operati
 
 const sdk = new NeonApi({
   security: {
-    bearerAuth: "YOUR_BEARER_TOKEN_HERE",
+    bearerAuth: "",
   },
 });
 
@@ -518,7 +518,7 @@ import { BranchState } from "neon-api/dist/sdk/models/shared";
 
 const sdk = new NeonApi({
   security: {
-    bearerAuth: "YOUR_BEARER_TOKEN_HERE",
+    bearerAuth: "",
   },
 });
 
@@ -555,7 +555,7 @@ import { OperationAction, OperationStatus } from "neon-api/dist/sdk/models/share
 
 const sdk = new NeonApi({
   security: {
-    bearerAuth: "YOUR_BEARER_TOKEN_HERE",
+    bearerAuth: "",
   },
 });
 
@@ -587,7 +587,7 @@ import { BranchState, OperationAction, OperationStatus } from "neon-api/dist/sdk
 
 const sdk = new NeonApi({
   security: {
-    bearerAuth: "YOUR_BEARER_TOKEN_HERE",
+    bearerAuth: "",
   },
 });
 
@@ -618,7 +618,7 @@ import { BranchState, OperationAction, OperationStatus } from "neon-api/dist/sdk
 
 const sdk = new NeonApi({
   security: {
-    bearerAuth: "YOUR_BEARER_TOKEN_HERE",
+    bearerAuth: "",
   },
 });
 
@@ -654,7 +654,7 @@ import { OperationAction, OperationStatus } from "neon-api/dist/sdk/models/share
 
 const sdk = new NeonApi({
   security: {
-    bearerAuth: "YOUR_BEARER_TOKEN_HERE",
+    bearerAuth: "",
   },
 });
 

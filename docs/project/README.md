@@ -43,7 +43,7 @@ import {
 
 const sdk = new NeonApi({
   security: {
-    bearerAuth: "YOUR_BEARER_TOKEN_HERE",
+    bearerAuth: "",
   },
 });
 
@@ -101,7 +101,7 @@ import { BillingSubscriptionType, Provisioner } from "neon-api/dist/sdk/models/s
 
 const sdk = new NeonApi({
   security: {
-    bearerAuth: "YOUR_BEARER_TOKEN_HERE",
+    bearerAuth: "",
   },
 });
 
@@ -130,7 +130,7 @@ import { BillingSubscriptionType, Provisioner } from "neon-api/dist/sdk/models/s
 
 const sdk = new NeonApi({
   security: {
-    bearerAuth: "YOUR_BEARER_TOKEN_HERE",
+    bearerAuth: "",
   },
 });
 
@@ -159,7 +159,7 @@ import { BillingSubscriptionType, Provisioner } from "neon-api/dist/sdk/models/s
 
 const sdk = new NeonApi({
   security: {
-    bearerAuth: "YOUR_BEARER_TOKEN_HERE",
+    bearerAuth: "",
   },
 });
 
@@ -189,7 +189,7 @@ import { BillingSubscriptionType, OperationAction, OperationStatus, Provisioner 
 
 const sdk = new NeonApi({
   security: {
-    bearerAuth: "YOUR_BEARER_TOKEN_HERE",
+    bearerAuth: "",
   },
 });
 

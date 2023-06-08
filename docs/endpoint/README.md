@@ -45,7 +45,7 @@ import {
 
 const sdk = new NeonApi({
   security: {
-    bearerAuth: "YOUR_BEARER_TOKEN_HERE",
+    bearerAuth: "",
   },
 });
 
@@ -107,7 +107,7 @@ import {
 
 const sdk = new NeonApi({
   security: {
-    bearerAuth: "YOUR_BEARER_TOKEN_HERE",
+    bearerAuth: "",
   },
 });
 
@@ -140,7 +140,7 @@ import { EndpointPoolerMode, EndpointState, EndpointType, Provisioner } from "ne
 
 const sdk = new NeonApi({
   security: {
-    bearerAuth: "YOUR_BEARER_TOKEN_HERE",
+    bearerAuth: "",
   },
 });
 
@@ -171,7 +171,7 @@ import { EndpointPoolerMode, EndpointState, EndpointType, Provisioner } from "ne
 
 const sdk = new NeonApi({
   security: {
-    bearerAuth: "YOUR_BEARER_TOKEN_HERE",
+    bearerAuth: "",
   },
 });
 
@@ -211,7 +211,7 @@ import {
 
 const sdk = new NeonApi({
   security: {
-    bearerAuth: "YOUR_BEARER_TOKEN_HERE",
+    bearerAuth: "",
   },
 });
 
@@ -250,7 +250,7 @@ import {
 
 const sdk = new NeonApi({
   security: {
-    bearerAuth: "YOUR_BEARER_TOKEN_HERE",
+    bearerAuth: "",
   },
 });
 
@@ -296,7 +296,7 @@ import {
 
 const sdk = new NeonApi({
   security: {
-    bearerAuth: "YOUR_BEARER_TOKEN_HERE",
+    bearerAuth: "",
   },
 });
 

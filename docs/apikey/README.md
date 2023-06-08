@@ -27,7 +27,7 @@ import { CreateApiKeyResponse } from "neon-api/dist/sdk/models/operations";
 
 const sdk = new NeonApi({
   security: {
-    bearerAuth: "YOUR_BEARER_TOKEN_HERE",
+    bearerAuth: "",
   },
 });
 
@@ -56,7 +56,7 @@ import { ListApiKeysResponse } from "neon-api/dist/sdk/models/operations";
 
 const sdk = new NeonApi({
   security: {
-    bearerAuth: "YOUR_BEARER_TOKEN_HERE",
+    bearerAuth: "",
   },
 });
 
@@ -85,7 +85,7 @@ import { RevokeApiKeyResponse } from "neon-api/dist/sdk/models/operations";
 
 const sdk = new NeonApi({
   security: {
-    bearerAuth: "YOUR_BEARER_TOKEN_HERE",
+    bearerAuth: "",
   },
 });
 
