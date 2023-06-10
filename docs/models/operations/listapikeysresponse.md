@@ -1,0 +1,12 @@
+# ListApiKeysResponse
+
+
+## Fields
+
+| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `apiKeysListResponseItems`                                                         | [shared.ApiKeysListResponseItem](../../models/shared/apikeyslistresponseitem.md)[] | :heavy_minus_sign:                                                                 | Returned the API keys for the Neon account                                         |
+| `contentType`                                                                      | *string*                                                                           | :heavy_check_mark:                                                                 | N/A                                                                                |
+| `generalError`                                                                     | [shared.GeneralError](../../models/shared/generalerror.md)                         | :heavy_minus_sign:                                                                 | General Error                                                                      |
+| `statusCode`                                                                       | *number*                                                                           | :heavy_check_mark:                                                                 | N/A                                                                                |
+| `rawResponse`                                                                      | [AxiosResponse>](https://axios-http.com/docs/res_schema)                           | :heavy_minus_sign:                                                                 | N/A                                                                                |

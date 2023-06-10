@@ -1,0 +1,10 @@
+# ListProjectOperationsRequest
+
+
+## Fields
+
+| Field                                                                                   | Type                                                                                    | Required                                                                                | Description                                                                             |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `cursor`                                                                                | *string*                                                                                | :heavy_minus_sign:                                                                      | Specify the cursor value from the previous response to get the next batch of operations |
+| `limit`                                                                                 | *number*                                                                                | :heavy_minus_sign:                                                                      | Specify a value from 1 to 1000 to limit number of operations in the response            |
+| `projectId`                                                                             | *string*                                                                                | :heavy_check_mark:                                                                      | The Neon project ID                                                                     |

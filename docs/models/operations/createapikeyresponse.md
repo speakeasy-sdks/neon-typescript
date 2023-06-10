@@ -1,0 +1,12 @@
+# CreateApiKeyResponse
+
+
+## Fields
+
+| Field                                                                      | Type                                                                       | Required                                                                   | Description                                                                |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `apiKeyCreateResponse`                                                     | [shared.ApiKeyCreateResponse](../../models/shared/apikeycreateresponse.md) | :heavy_minus_sign:                                                         | Created an API key                                                         |
+| `contentType`                                                              | *string*                                                                   | :heavy_check_mark:                                                         | N/A                                                                        |
+| `generalError`                                                             | [shared.GeneralError](../../models/shared/generalerror.md)                 | :heavy_minus_sign:                                                         | General Error                                                              |
+| `statusCode`                                                               | *number*                                                                   | :heavy_check_mark:                                                         | N/A                                                                        |
+| `rawResponse`                                                              | [AxiosResponse>](https://axios-http.com/docs/res_schema)                   | :heavy_minus_sign:                                                         | N/A                                                                        |

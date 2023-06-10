@@ -1,0 +1,12 @@
+# DeleteProjectBranchDatabaseResponse
+
+
+## Fields
+
+| Field                                                                  | Type                                                                   | Required                                                               | Description                                                            |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `contentType`                                                          | *string*                                                               | :heavy_check_mark:                                                     | N/A                                                                    |
+| `databaseOperations`                                                   | [shared.DatabaseOperations](../../models/shared/databaseoperations.md) | :heavy_minus_sign:                                                     | Deleted the specified database                                         |
+| `generalError`                                                         | [shared.GeneralError](../../models/shared/generalerror.md)             | :heavy_minus_sign:                                                     | General Error                                                          |
+| `statusCode`                                                           | *number*                                                               | :heavy_check_mark:                                                     | N/A                                                                    |
+| `rawResponse`                                                          | [AxiosResponse>](https://axios-http.com/docs/res_schema)               | :heavy_minus_sign:                                                     | N/A                                                                    |

@@ -1,0 +1,14 @@
+# ApiKeyRevokeResponse
+
+Revoked the specified API key
+
+
+## Fields
+
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `id`                                                                                          | *number*                                                                                      | :heavy_check_mark:                                                                            | The API key ID                                                                                |
+| `lastUsedAt`                                                                                  | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | A timestamp indicating when the API was last used                                             |
+| `lastUsedFromAddr`                                                                            | *string*                                                                                      | :heavy_check_mark:                                                                            | The IP address from which the API key was last used                                           |
+| `name`                                                                                        | *string*                                                                                      | :heavy_check_mark:                                                                            | The user-specified API key name                                                               |
+| `revoked`                                                                                     | *boolean*                                                                                     | :heavy_check_mark:                                                                            | A `true` or `false` value indicating whether the API key is revoked                           |
