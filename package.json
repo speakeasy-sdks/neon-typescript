@@ -1,6 +1,6 @@
 {
   "name": "neon-api",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "author": "neon",
   "scripts": {
     "prepare": "tsc --build"
